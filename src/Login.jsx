@@ -1,15 +1,26 @@
 import React from 'react'
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect,useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios'
 
 
 function Login() {
     const [Email, setEmail] = useState()
     const [Password, setPassword] = useState()
+    const [message, setMessage] = useState('');
     const navigate = useNavigate()
+    const location = useLocation();  
 
     axios.defaults.withCredentials = true;
+    useEffect(() => {
+      // Checking to see if navigated back to login
+
+      if (location.state && location.state.message) {
+        console.log("reached" , location)
+          setMessage(location.state.message);
+      }
+  }, [location.state]);
+
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post('http://localhost:3001/login', {Email, Password})
@@ -28,6 +39,7 @@ function Login() {
         <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
       <div className="bg-white p-3 rounded w-25">
         <h2>Login</h2>
+        {message && <div className="alert alert-info" role="alert">{message}</div>}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="Email">

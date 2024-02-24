@@ -20,10 +20,11 @@ function Test() {
     }
 
     return(
-        <Div>
+        <div>
             <input type='submit'></input>
             <h1>em  {Email}</h1>
-        </Div>
+            <p>test</p>
+        </div>
         
     )
 }
