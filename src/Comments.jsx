@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios'
-import Comments from "./Comments";
+const Comments = (props) => {
 
-function Dashboard() {
+
     const [suc, setSuc] = useState()
     const navigate = useNavigate()
     const [e, setE] = useState([])
     axios.defaults.withCredentials = true;
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:3001/dashboard');
+                //console.log(props.eventId)
+                const res = await axios.get(`http://localhost:3001/comments/` + props.eventId);
                 setSuc("Successded OK");
+                //console.log("Response data:", res.data);
                 setE(res.data);
             } catch (error) {
                 if (error.response) {
@@ -37,31 +38,18 @@ function Dashboard() {
 
     return (
         <div>
-            <h2>Logout: </h2>
-            <Link to="/logout" className='navbar-link'>Logout</Link>
-            <h2>Events</h2>
+       
             <ul>
-                {e.map(element => (
-                    <div key={element.id}>
-                    <li>
-                
-                        <p><b>Title: {element.title}</b></p>
-                        <p>date: {element.date}</p>
-                        <p>Location: {element.location}</p>
-                        <p>category: {element.category}</p>
-                        <p>summary: {element.summary}</p>
-                        <p>link: {element.link}</p>
+
+                {e[0] && e[0].Comments.map(element => (
+                    <li key={element.user}>
+                        <p><b>Name: {element.name}</b></p>
+                        <p>Comment: {element.comment}</p>
                     </li>
-                    <p>Comments:</p>
-                    <Comments eventId={element._id} />
-                </div>
-                   
-                ))
-                
-                }
+                ))}
             </ul>
         </div>
     );
 }
 
-export default Dashboard;
+export default Comments;
