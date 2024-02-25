@@ -5,6 +5,8 @@ import Dashboard from './dashboard'
 import Home from "./home"
 import Complete from "./complete"
 import Test from "./test"
+import Logout from "./Logout"
+
 
 function App() {
 
@@ -17,6 +19,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/complete" element={<Complete />}></Route>
         <Route path="/test" element={<Test />}></Route>
+        <Route path="/logout" element={<Logout />}></Route>
       </Routes>
     </BrowserRouter>
   )

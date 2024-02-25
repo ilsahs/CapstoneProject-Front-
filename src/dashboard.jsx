@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios'
 
 function Dashboard() {
@@ -91,6 +91,8 @@ function Dashboard() {
 
     return (
         <div>
+            <h2>Logout: </h2>
+            <Link to="/logout" className='navbar-link'>Logout</Link>
             <h2>Events</h2>
             <ul>
                 {e.map(element => (
