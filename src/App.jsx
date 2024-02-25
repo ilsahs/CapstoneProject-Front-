@@ -6,7 +6,7 @@ import Home from "./home"
 import Complete from "./complete"
 import Test from "./test"
 import Logout from "./Logout"
-
+import Comments from "./Comments"
 
 function App() {
 
@@ -20,6 +20,7 @@ function App() {
         <Route path="/complete" element={<Complete />}></Route>
         <Route path="/test" element={<Test />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
+        <Route path="/Comment/:eventid" element={<Comments />}></Route>
       </Routes>
     </BrowserRouter>
   )
