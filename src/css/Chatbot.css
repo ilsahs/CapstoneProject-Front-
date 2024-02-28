@@ -1,0 +1,28 @@
+
+.App {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px; /* Add padding for spacing */
+}
+
+img {
+    max-width: 20%;
+}
+
+button {
+    margin-top: 20px;
+}
+
+.chatgpt-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #ffff;
+    border-radius: 12px;
+    width: 60%;
+    padding: 20px;
+}
