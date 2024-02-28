@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect,useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios'
+import './css/login.css';
 
 
 function Login() {
@@ -35,49 +36,49 @@ function Login() {
         }).catch(err => console.log(err))
     }
 
-    return(
-        <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
-      <div className="bg-white p-3 rounded w-25">
-        <h2>Login</h2>
-        {message && <div className="alert alert-info" role="alert">{message}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="Email">
-              <strong>Email</strong>
-            </label>
-            <input
-              type="email"
-              placeholder="Enter Email"
-              autoComplete="off"
-              name="Email"
-              className="form-control rounded-0"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="Password">
-              <strong>Password</strong>
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="Password"
-              className="form-control rounded-0"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type="submit" className="btn btn-success w-100 rounded-0">
-            Login
-          </button>
+    return (
+      <div className="container">
+        <div className="left-side">
+          <h2 className="title">LOGIN</h2>
+          {message && <div className="alert alert-info" role="alert">{message}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+            <label htmlFor="Email"><strong>Email</strong></label>
+              <input
+                type="email"
+                placeholder="Enter Email"
+                autoComplete="off"
+                name="email"
+                className="input rounded"
+                value={Email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+            <label htmlFor="Password"><strong>Password</strong></label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                name="password"
+                className="input rounded"
+                value={Password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button type="submit" className="button w-100 rounded">Login</button>
           </form>
-          <p>Already Have an Account</p>
-          <Link to="/Register" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
-            Sign Up
-          </Link>
-        
+          <p className="anchor">New to our platform? <Link to="/Register" className="btn btn-default border bg-light rounded text-decoration-none">Sign Up</Link></p>
+        </div>
+        <div className="right-side">
+        <h2>Don't have an account?!</h2>
+        <p> Discover, Connect, Chat! Your ultimate hub for Event Exploration and Connection</p>
+        <Link to="/Register" className="button w-100 rounded">
+          SIGN UP
+        </Link>
       </div>
-    </div>
-    )
-}
 
-export default Login;
+      </div>
+    );
+  }
+  
+  export default Login;
