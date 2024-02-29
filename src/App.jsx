@@ -13,6 +13,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Chatbot/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Signup />}></Route>

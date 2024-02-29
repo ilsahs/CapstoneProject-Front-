@@ -34,9 +34,7 @@ function Chatbot() {
 
     return (
         <div className="App">
-            <h2>EventBot</h2>
-            <img src={bot} alt="Chatbot" /> <br />
-            <button onClick={handleOpen} className="btn">Ask me anything</button>
+            
 
             <Modal
                 open={open}
@@ -64,6 +62,12 @@ function Chatbot() {
                     )}
                 </Box>
             </Modal>
+        {/* Floating chat button */}
+        <button 
+        onClick={handleOpen} 
+        className="floating-chat-btn"
+        style={{ backgroundImage: `url(${bot})` }} // Set the image as background
+        />
         </div>
     )
 }
