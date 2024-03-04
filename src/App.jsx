@@ -10,11 +10,13 @@ import Comments from "./Comments"
 import Forum from "./forum"
 import Replies from "./replies"
 import fComments from "./fcomments"
+import Chatbot from "./Chatbot"
 
 function App() {
 
   return (
     <BrowserRouter>
+    <Chatbot/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/register" element={<Signup />}></Route>
@@ -23,6 +25,7 @@ function App() {
         <Route path="/complete" element={<Complete />}></Route>
         <Route path="/test" element={<Test />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
+        <Route path="/chatbot" element={<Chatbot />} /> 
         <Route path="/Comment/:eventid" element={<Comments />}></Route>
         <Route path="/forum" element={<Forum />}></Route>
         <Route path="/:id/replies" element={<Replies />}></Route>

@@ -47,10 +47,12 @@ function Dashboard() {
                 
                         <p><b>Title: {element.title}</b></p>
                         <p>date: {element.date}</p>
+                        <p>time: {element.time}</p>
                         <p>Location: {element.location}</p>
                         <p>category: {element.category}</p>
                         <p>summary: {element.summary}</p>
                         <p>link: {element.link}</p>
+                        <img src={element.image} height="150px"></img>
                     </li>
                     <p>Comments:</p>
                     <Comments eventId={element._id} />

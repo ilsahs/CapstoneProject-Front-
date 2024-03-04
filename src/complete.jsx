@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './css/complete.css'
 import axios from 'axios'
 
 import PreferencesSelector from './pref'
@@ -38,52 +38,54 @@ function Complete() {
         setProfilePicture(e.target.files[0]);
       };
 
-  return (
-    <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
-      <div className="bg-white p-3 rounded w-55">
-        <h2>Complete your profile!</h2>
-        <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-            <label htmlFor="ProfilePicture">
-              <strong> Choose a Profile Picture</strong>
-            </label>
-            <input
-              type="file"
-              placeholder="Choose Image"
-              autoComplete="off"
-              name="ProfilePicture"
-              className="form-control rounded-0"
-              onChange={handleFileChange}
-            />
+      return (
+        <div className="complete-container">
+          <div className="form-container">
+            <h2 className="complete-h2">Complete your profile!</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="file-input-container mb-3">
+                <label htmlFor="ProfilePicture" className="file-input-label">
+                  <strong> Choose a Profile Picture</strong>
+                </label>
+                <input
+                  type="file"
+                  placeholder="Choose Image"
+                  autoComplete="off"
+                  name="ProfilePicture"
+                  className="file-input form-control rounded-0"
+                  onChange={handleFileChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="DOB">
+                  <strong>DOB</strong>
+                </label>
+                <input
+                  type="date"
+                  placeholder="Enter DOB"
+                  autoComplete="off"
+                  name="DOB" 
+                  className="date-input form-control rounded-0"
+                  onChange={(e) => setDOB(e.target.value)}
+                />
+              </div><br/>
+              <div className="preferences-selector-container mb-3">
+                <PreferencesSelector 
+                  selectedPreferences={selectedPreferences}
+                  setSelectedPreferences={setSelectedPreferences}
+                /> 
+              </div>
+              <button type="submit" className="update-button btn btn-success w-100 rounded-0">
+                Update
+              </button>
+            </form><br/>
+            <p></p>
+            <Link to="/dashboard" className="skip-link" style={{color:'black'}}>
+              Skip for now
+            </Link>
           </div>
-          <div className="mb-3">
-            <label htmlFor="DOB">
-              <strong>DOB</strong>
-            </label>
-            <input
-              type="date"
-              placeholder="Enter DOB"
-              autoComplete="off"
-              name="DOB"
-              className="form-control rounded-0"
-              onChange={(e) => setDOB(e.target.value)}
-            />
-          </div>
-          <PreferencesSelector 
-          selectedPreferences={selectedPreferences}
-          setSelectedPreferences={setSelectedPreferences}/> 
-          <button type="submit" className="btn btn-success w-100 rounded-0">
-            Update
-          </button>
-          </form>
-          <p></p>
-          <Link to="/dashboard" style={{color:'black'}}>
-          Skip for now
-          </Link>
-        
-      </div>
-    </div>
-  );
+        </div>
+      );
 }
 
 export default Complete;
