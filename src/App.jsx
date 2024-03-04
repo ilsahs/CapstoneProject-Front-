@@ -7,6 +7,9 @@ import Complete from "./complete"
 import Test from "./test"
 import Logout from "./Logout"
 import Comments from "./Comments"
+import Forum from "./forum"
+import Replies from "./replies"
+import fComments from "./fcomments"
 
 function App() {
 
@@ -21,6 +24,8 @@ function App() {
         <Route path="/test" element={<Test />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/Comment/:eventid" element={<Comments />}></Route>
+        <Route path="/forum" element={<Forum />}></Route>
+        <Route path="/:id/replies" element={<Replies />}></Route>
       </Routes>
     </BrowserRouter>
   )
