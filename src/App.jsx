@@ -7,6 +7,9 @@ import Complete from "./complete"
 import Test from "./test"
 import Logout from "./Logout"
 import Comments from "./Comments"
+import Forum from "./forum"
+import Replies from "./replies"
+import fComments from "./fcomments"
 import Chatbot from "./Chatbot"
 
 function App() {
@@ -24,6 +27,8 @@ function App() {
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/chatbot" element={<Chatbot />} /> 
         <Route path="/Comment/:eventid" element={<Comments />}></Route>
+        <Route path="/forum" element={<Forum />}></Route>
+        <Route path="/:id/replies" element={<Replies />}></Route>
       </Routes>
     </BrowserRouter>
   )
