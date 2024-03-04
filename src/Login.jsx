@@ -37,46 +37,51 @@ function Login() {
     }
 
     return (
-      <div className="container">
-        <div className="left-side">
-          <h2 className="title">LOGIN</h2>
-          {message && <div className="alert alert-info" role="alert">{message}</div>}
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-            <label htmlFor="Email"><strong>Email</strong></label>
-              <input
-                type="email"
-                placeholder="Enter Email"
-                autoComplete="off"
-                name="email"
-                className="input rounded"
-                value={Email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-            <label htmlFor="Password"><strong>Password</strong></label>
-              <input
-                type="password"
-                placeholder="Enter Password"
-                name="password"
-                className="input rounded"
-                value={Password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit" className="button w-100 rounded">Login</button>
-          </form>
-          <p className="anchor">New to our platform? <Link to="/Register" className="btn btn-default border bg-light rounded text-decoration-none">Sign Up</Link></p>
+      <div className="log-container">
+        <div className="log-boxes">
+          <div className="log-left">
+            <h2 className="title">LOGIN</h2>
+            {message && <div className="alert alert-info" role="alert">{message}</div>}
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="Email"><strong>Email</strong></label><br/>
+                <input
+                  type="email"
+                  placeholder="Enter Email"
+                  autoComplete="off"
+                  name="email"
+                  className="input rounded"
+                  value={Email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div><br/>
+              <div className="mb-3">
+                <label htmlFor="Password"><strong>Password</strong></label><br/>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="password"
+                  className="input rounded"
+                  value={Password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <p className="anchor">
+                <Link to="/forgot-password" className="text-decoration-none">Forgot Password?</Link>
+              </p>
+              </div>
+              <button type="submit" className="button w-100 rounded">Login</button>
+              
+            </form><br/>
+            <p className="anchor">New to our platform? <Link to="/Register" className="btn btn-default border bg-light rounded text-decoration-none">Sign Up</Link></p>
+          </div>
+          <div className="log-right">
+            <h2>Don't have an account?!</h2>
+            <p> Discover, Connect, Chat! Your ultimate hub for Event Exploration and Connection</p><br/>
+            <Link to="/Register" className="button w-100 rounded">
+              SIGN UP
+            </Link>
+          </div>
         </div>
-        <div className="right-side">
-        <h2>Don't have an account?!</h2>
-        <p> Discover, Connect, Chat! Your ultimate hub for Event Exploration and Connection</p>
-        <Link to="/Register" className="button w-100 rounded">
-          SIGN UP
-        </Link>
-      </div>
-
       </div>
     );
   }
