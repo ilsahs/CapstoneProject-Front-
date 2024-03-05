@@ -17,7 +17,6 @@ function App() {
         <Route path='/eventbot' element={<EventBot />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/comments' element={<Comment />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,108 @@
+/* complete.css */
+
+/* Container styling */
+.complete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2; /* Light grey */
+  height: 100vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+/* Form container */
+.form-container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f8f8f8, #c0c0c0);
+  background-color: white;
+  padding: 20px;
+  width: 90%; /* Adjust as needed */
+  max-width: 400px; /* Adjust as needed */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+/* Heading */
+.complete-h2{
+  font-size: 2.5rem;
+  margin-bottom: 30px; /* Spacing after each h2 or strong */
+  display: block;
+}
+.file-input-label {
+  font-size: 1.5rem;
+  margin-bottom: 30px; /* Spacing after each h2 or strong */
+  display: block; /* Ensures each heading is on a new line */
+}
+
+/* File input container */
+.file-input-container {
+  margin-bottom: 20px;
+}
+
+/* File input */
+.file-input {
+  color:black;
+  background-color: white;
+  font-size: 1.0rem;
+  border: 1px solid #ccc; /* Example border style */
+  padding: 8px; /* Example padding */
+  border-radius: 5px; /* Example border radius */
+  width: 100%; /* Example width */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+
+/* Date input */
+.date-input {
+  color:black;
+  font-size: 1.0rem;
+  border: 1px solid #ccc; /* Example border style */
+  padding: 8px; /* Example padding */
+  border-radius: 5px; /* Example border radius */
+  width: 100%; /* Example width */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+/* Preferences selector container */
+.preferences-selector-container {
+  margin-bottom: 20px;
+}
+
+/* Select preference container */
+.select-preference-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Select preference label */
+.select-preference-label {
+  margin-right: 10px;
+}
+
+/* Select preference dropdown */
+.select-preference-dropdown {
+  width: 70%; /* Adjust width as needed */
+  border-radius: 5px;
+  padding: 8px;
+}
+
+/* Add preference button */
+.add-preference-button {
+  width: 30%; /* Adjust width as needed */
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 10px;
+  background-color: #007bff; /* Blue color */
+  color: white;
+}
+
+/* Update button */
+.update-button {
+  width: 100%;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  padding: 10px;
+  background-color: black; /* Green color */
+  color: white; /* Change text color to white */
+}
