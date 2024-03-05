@@ -1,39 +1,129 @@
 /* Chatbot.css */
+
+/* Styling for the floating chat button */
 .floating-chat-btn {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Position the button relative to the viewport */
-    bottom: 6%; /* Distance from the bottom of the viewport */
-    right: 3%; /* Distance from the right of the viewport */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    z-index: 1000;
 }
+
+/* Styling for the overall app */
 .App {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 20px; /* Add padding for spacing */
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
-img {
-    max-width: 20%;
-}
-
-button {
-    margin-top: 20px;
-}
-
+/* Styling for the modal that contains the chat */
 .chatgpt-modal {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Container for the chat interface */
 .container {
-    background-color: #ffff;
+    background-color: #fff;
     border-radius: 12px;
-    width: 60%;
-    padding: 20px;
+    width: 150px; /* Keep the width the same */
+    min-height: 450px; /* Set a minimum height for the container */
+    max-height: 95vh; /* Increase the maximum height if needed */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    padding: 3%;
+}
+
+/* Container for messages */
+.messages-container {
+    padding: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Styling for individual messages */
+.message {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    position: relative; /* For absolute positioning of the avatar */
+}
+
+/* Styling for messages from the user */
+.user-message {
+    background-color: #9C27B0;
+    align-self: flex-end; /* Align to the right */
+    flex-direction: row-reverse; /* Reverse order so avatar is on the left */
+}
+
+/* Styling for messages from the bot */
+.bot-message {
+    background-color: #442280; /* A different shade of purple for bot messages */
+    align-self: flex-start; /* Align to the left */
+    margin-right: 50px; /* Pushes the message bubble to the left */
+}
+
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+
+/* Styling for the input area at the bottom of the chat */
+.input-area {
+    display: flex; /* Aligns children (text field and button) inline */
+    padding: 10px;
+    background-color: #fff; /* White background for input area */
+    border-top: 1px solid #e0e0e0; /* Light grey border for separation */
+}
+
+/* Styling for the input field */
+.input-field {
+    flex-grow: 1; /* Allows input field to grow and fill the available space */
+    margin-right: 8px; /* Space between the input field and the submit button */
+    border: 1px solid #ced4da; /* Input field border */
+    border-radius: 20px; /* Rounded corners for input field */
+}
+
+/* Styling for the send/submit button */
+.submit-button {
+    background-color: #9C27B0; /* Purple background to match user messages */
+    color: white; /* White text/icon color */
+    border-radius: 50%; /* Circular shape for the button */
+    padding: 8px; /* Padding inside the button */
+    min-width: 48px; /* Minimum width for the button */
+    min-height: 48px; /* Minimum height to match the input field */
+}
+
+/* Adjustments for the send icon itself, if necessary */
+.submit-button .MuiSvgIcon-root {
+    /* Optional: If you need to adjust the icon size */
+    font-size: 1.5rem; /* Example size, adjust as needed */
+}
+
+
+
 }

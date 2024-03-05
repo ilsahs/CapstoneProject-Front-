@@ -1,37 +1,25 @@
-import Login from "./Login"
-import Signup from "./Register"
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Dashboard from './dashboard'
-import Home from "./home"
-import Complete from "./complete"
-import Test from "./test"
-import Logout from "./Logout"
-import Comments from "./Comments"
-import Forum from "./forum"
-import Replies from "./replies"
-import fComments from "./fcomments"
-import Chatbot from "./Chatbot"
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Home from './pages/Home';
+import Navbar from './Navbar'; 
+import EventBot from './pages/EventBot';
+import Login from './Login';
+import Register from './pages/Register';
+import Comment from './pages/Comment';
 
 function App() {
-
   return (
-    <BrowserRouter>
-    <Chatbot/>
+    <Router>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/register" element={<Signup />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/complete" element={<Complete />}></Route>
-        <Route path="/test" element={<Test />}></Route>
-        <Route path="/logout" element={<Logout />}></Route>
-        <Route path="/chatbot" element={<Chatbot />} /> 
-        <Route path="/Comment/:eventid" element={<Comments />}></Route>
-        <Route path="/forum" element={<Forum />}></Route>
-        <Route path="/:id/replies" element={<Replies />}></Route>
+        <Route path='/' element={<Home />} />
+        <Route path='/eventbot' element={<EventBot />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
-    </BrowserRouter>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;

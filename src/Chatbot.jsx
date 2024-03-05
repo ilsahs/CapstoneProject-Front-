@@ -1,41 +1,45 @@
-import bot from "./assets/chatbot.jpg";
-import './css/Chatbot.css';
-import { Modal, Typography, Box, TextField, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from "axios";
+import { Modal, Typography, Box, TextField, Button, Avatar } from '@mui/material';
+import './css/Chatbot.css';
+import botAvatar from "./assets/botAvatar.png";
 
 function Chatbot() {
     const [open, setOpen] = useState(false);
     const [prompt, setPrompt] = useState("");
-    const [response, setResponse] = useState("");
+    const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const messagesEndRef = useRef(null);
 
-    const handleOpen = () => {
-        setOpen(true);
-    }
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
-    const handleClose = () => {
-        setOpen(false);
-    }
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!prompt.trim()) return;
+    
         setLoading(true);
+        const userMessage = { text: prompt, sender: 'user' };
+        setMessages([...messages, userMessage]);
+        setPrompt("");
+    
         try {
             const res = await axios.post("http://localhost:3001/chat", { prompt });
-            setResponse(res.data); // Assuming the response contains data property
-            setLoading(false);
-            console.log(res);
+            const botResponse = { text: res.data, sender: 'bot' };
+            setMessages(currentMessages => [...currentMessages, botResponse]);
         } catch (error) {
             console.error("Error submitting query:", error);
-            setLoading(false);
         }
-    }
+    
+        setLoading(false);
+    };
 
     return (
         <div className="App">
-            
-
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -44,32 +48,44 @@ function Chatbot() {
                 className="chatgpt-modal"
             >
                 <Box className="container">
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Drop your Questions
-                    </Typography>
-                    <form onSubmit={handleSubmit}>
-                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                            <TextField value={prompt} onChange={e => setPrompt(e.target.value)} id="outlined-basic" label="Query" variant="outlined" sx={{ margin: "15px 0", width: "100%" }} />
-                            <Button type="submit" className="btn" disabled={loading}>
-                                {loading ? "Loading..." : "Submit"}
-                            </Button>
-                        </div>
-                    </form>
-                    {response && (
-                        <div className="response">
-                            <p>{response}</p>
-                        </div>
-                    )}
+                    <Box className="chat-header">
+                        <Avatar src={botAvatar} className="bot-avatar" />
+                        <Typography variant="h6" component="div" className="header-title">
+                            Event Bot Support
+                        </Typography>
+                    </Box>
+                    <div className="messages-container">
+                        {messages.map((message, index) => (
+                            <div key={index} className={`message ${message.sender}-message`}>
+                                <span>{message.text}</span>
+                            </div>
+                        ))}
+                        <div ref={messagesEndRef} />
+                    </div>
+                    <Box className="input-area" component="form" onSubmit={handleSubmit}>
+                        <TextField
+                            value={prompt}
+                            onChange={e => setPrompt(e.target.value)}
+                            id="outlined-basic"
+                            label="Query"
+                            variant="outlined"
+                            className="input-field"
+                            disabled={loading}
+                            fullWidth
+                        />
+                        <Button type="submit" color="primary" disabled={loading} className="submit-button">
+                            Send
+                        </Button>
+                    </Box>
                 </Box>
             </Modal>
-        {/* Floating chat button */}
-        <button 
-        onClick={handleOpen} 
-        className="floating-chat-btn"
-        style={{ backgroundImage: `url(${bot})` }} // Set the image as background
-        />
+            <button 
+                onClick={handleOpen} 
+                className="floating-chat-btn"
+                style={{ backgroundImage: `url(${botAvatar})` }}
+            />
         </div>
-    )
+    );
 }
 
 export default Chatbot;
