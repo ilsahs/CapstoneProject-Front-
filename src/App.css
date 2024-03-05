@@ -1,42 +1,48 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home,
+.events,
+.favorites,
+.login,
+.sign-up,
+.eventbot {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.events {
+  color: "black";
+  font-size: 100px;
 }
 
-.card {
-  padding: 2em;
+.favorites {
+  color: "black";
+  font-size: 100px;
 }
 
-.read-the-docs {
-  color: #888;
+.login {
+  color: "black";
+  font-size: 100px;
+}
+
+.eventbot {
+  color: "black";
+  font-size: 100px;
+}
+
+.sign-up {
+  /* background-image: url('../public/images/img-8.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; */
+  color: "black";
+  font-size: 100px;
 }
