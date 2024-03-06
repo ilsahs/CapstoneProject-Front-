@@ -1,8 +1,8 @@
-import Chatbot from '../Login'; 
+import Login from '../Login'; 
 import Chatbot from '../Chatbot';
 
 
-function Login() {
+function LoginPage() {
     return (
         <>
             <Login />
@@ -12,4 +12,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default LoginPage;
