@@ -2,66 +2,69 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios'
 import Comments from "./Comments";
+import './css/dashboard.css';
+import eventBanner from './assets/event33.jpg'; // Import the banner image
+
 
 function Dashboard() {
     const [suc, setSuc] = useState()
     const navigate = useNavigate()
-    const [e, setE] = useState([])
+    const [events, setEvents] = useState([])
     axios.defaults.withCredentials = true;
-
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.get('http://localhost:3001/dashboard');
                 setSuc("Successded OK");
-                setE(res.data);
+                setEvents(res.data);
             } catch (error) {
                 if (error.response) {
-
                     console.error("Server responded with non-success status", error.response.status);
 
                     if (error.response.status === 401) {
                         // Unauthorized, redirect to login
                         navigate('/login', { state: { message: 'Please login to proceed.' } });
-                    } else {
-
                     }
                 }
             }
         };
 
         fetchData();
-    }, []);
-
+    }, [navigate]);
 
     return (
         <div>
-            <h2>Logout: </h2>
-            <Link to="/logout" className='navbar-link'>Logout</Link>
-            <h2>Events</h2>
-            <ul>
-                {e.map(element => (
-                    <div key={element.id}>
-                    <li>
-                
-                        <p><b>Title: {element.title}</b></p>
-                        <p>date: {element.date}</p>
-                        <p>time: {element.time}</p>
-                        <p>Location: {element.location}</p>
-                        <p>category: {element.category}</p>
-                        <p>summary: {element.summary}</p>
-                        <p>link: {element.link}</p>
-                        <img src={element.image} height="150px"></img>
-                    </li>
-                    <p>Comments:</p>
-                    <Comments eventId={element._id} />
+            <div className="banner">
+                <img src={eventBanner} alt="Banner" />
+                <div className="banner-text">
+                    <h2>EVENTS IN QATAR</h2>
+                    <p>Discover an unforgettable holiday experience in Qatar with a variety of thrilling events like never before.</p>
                 </div>
-                   
-                ))
-                
-                }
-            </ul>
+            </div>
+            <div className="dashboard-container">
+                <ul className="events-list">
+                    {events.map(event => (
+                        <li key={event.id} className="event-item">
+                            <img src={event.image} alt="Event" />
+                            <div className="event-details">
+                                <p><b>Title: {event.title}</b></p>
+                                <p>Date: {event.date}</p>
+                                <p>Time: {event.time}</p>
+                                <p>Location: {event.location}</p>
+                                <p>Category: {event.category}</p>
+                                <p>Summary: {event.summary}</p>
+                                <p>Link: {event.link}</p>
+                                <div className="comments-section">
+                                    <p>Comments:</p>
+                                    {/* Assuming Comments is a component */}
+                                    {/* <Comments eventId={event._id} /> */}
+                                </div>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
