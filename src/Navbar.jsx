@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button'; // Ensure this Button component is properly exported and compatible with JSX.
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './css/Navbar.css';
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const location = useLocation(); // Use useLocation hook to get the current location
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -17,6 +18,14 @@ function Navbar() {
       setButton(true);
     }
   };
+
+  const logoutButton = location.pathname === '/dashboard' ? (
+    <li className='nav-item'>
+        <Link to='/logout' className='nav-links' onClick={closeMobileMenu}>
+            Logout
+        </Link>
+    </li>
+) : null;
 
   useEffect(() => {
     showButton();
@@ -59,6 +68,7 @@ function Navbar() {
                 Favorites
               </Link>
             </li>
+            {logoutButton} {/* Include the logoutButton here */}
             <li>
               <Link to='./Register' className='nav-links-mobile' onClick={closeMobileMenu}>
                 Sign Up
