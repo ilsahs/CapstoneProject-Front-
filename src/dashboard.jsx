@@ -53,8 +53,7 @@ function Dashboard() {
                                 <p>Time: {event.time}</p>
                                 <p>Location: {event.location}</p>
                                 <p>Category: {event.category}</p>
-                                <p>Summary: {event.summary}</p>
-                                <p>Link: {event.link}</p>
+                                <p>Summary: {event.description}</p>
                                 <div className="comments-section">
                                     <p>Comments:</p>
                                     {/* Assuming Comments is a component */}
