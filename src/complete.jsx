@@ -6,6 +6,7 @@ import axios from 'axios'
 import PreferencesSelector from './pref'
 function Complete() {
     const [ProfilePicture, setProfilePicture] = useState()
+    const [skip, setSkip] = useState(false)
     const [DOB, setDOB] = useState()
     const [Password, setPassword] = useState()
     const [selectedPreferences, setSelectedPreferences] = useState([]);
@@ -16,6 +17,7 @@ function Complete() {
         const formData = new FormData();
     formData.append('ProfilePicture', ProfilePicture);
     formData.append('DOB', DOB);
+    formData.append('Skip', skip);
     formData.append('selectedPreferences', selectedPreferences.join(','));
 
     
@@ -28,7 +30,7 @@ function Complete() {
     })
     .then(res => {
         
-        navigate('/login');
+        navigate('/dashboard');
     })
     .catch(err => console.log(err));
 
@@ -38,6 +40,9 @@ function Complete() {
         setProfilePicture(e.target.files[0]);
       };
 
+      const handleCheckboxChange = (e) => {
+        setSkip(e.target.checked); 
+    };
       return (
         <div className="complete-container">
           <div className="form-container">
@@ -80,6 +85,12 @@ function Complete() {
               </button>
             </form><br/>
             <p></p>
+                
+                    <input type="checkbox" checked={skip} onChange={handleCheckboxChange}/>
+                    <label>
+                    Don't show this again
+                </label>
+<br></br>
             <Link to="/dashboard" className="skip-link" style={{color:'black'}}>
               Skip for now
             </Link>

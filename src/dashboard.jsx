@@ -10,6 +10,7 @@ function Dashboard() {
     const [suc, setSuc] = useState()
     const navigate = useNavigate()
     const [events, setEvents] = useState([])
+    const [email,setEmail] = useState()
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
@@ -17,7 +18,10 @@ function Dashboard() {
             try {
                 const res = await axios.get('http://localhost:3001/dashboard');
                 setSuc("Successded OK");
-                setEvents(res.data);
+                console.log("Response:", res.data);
+                console.log("Events:", res.data.events); 
+                setEvents(res.data.events);
+                setEmail(res.data.email)
             } catch (error) {
                 if (error.response) {
                     console.error("Server responded with non-success status", error.response.status);
@@ -57,7 +61,7 @@ function Dashboard() {
                                 <div className="comments-section">
                                     <p>Comments:</p>
                                     {/* Assuming Comments is a component */}
-                                    {/* <Comments eventId={event._id} /> */}
+                                    <Comments eventId={event._id} email={email}/>
                                 </div>
                             </div>
                         </li>

@@ -27,10 +27,12 @@ function Login() {
         axios.post('http://localhost:3001/login', {Email, Password})
         .then(res => {
             console.log("login: " + res.data);
-            if(res.data.Status === "Success") {
-                navigate("/complete",{ state: { token: res.data.token }})
+            console.log("status" + res.data.Status)
+            console.log("status" + res.data.Skip)
+            if(res.data.Status === "Success" && res.data.Skip === "true") {
+                navigate("/dashboard",{ state: { token: res.data.token }})
             }
-            if(res.data.Status === "incomp") {
+            if(res.data.Status === "Success" && res.data.Skip === "false") {
               navigate("/complete")
           }
         }).catch(err => console.log(err))

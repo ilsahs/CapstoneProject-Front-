@@ -8,14 +8,15 @@ const Comments = (props) => {
     const navigate = useNavigate()
     const [e, setE] = useState([])
     axios.defaults.withCredentials = true;
-
+    const [newComment, setNewComment] = useState()
+    const [eventID, seteventID] = useState(props.eventId)
+    const [email, setemail] = useState(props.email)
     useEffect(() => {
         const fetchData = async () => {
             try {
                 //console.log(props.eventId)
                 const res = await axios.get(`http://localhost:3001/comments/` + props.eventId);
                 setSuc("Successded OK");
-                //console.log("Response data:", res.data);
                 setE(res.data);
             } catch (error) {
                 if (error.response) {
@@ -33,8 +34,15 @@ const Comments = (props) => {
         };
 
         fetchData();
-    }, []);
+    });
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        axios.post('http://localhost:3001/comments', {eventID, newComment, email })
+        .then(res => {
+            console.log("posted");
+        }).catch(err => console.log(err))
+    }
 
     return (
         <div>
@@ -43,11 +51,25 @@ const Comments = (props) => {
 
                 {e[0] && e[0].Comments.map(element => (
                     <li key={element.user}>
-                        <p><b>Name: {element.name}</b></p>
-                        <p>Comment: {element.comment}</p>
+                        <p><b>{element.name}</b></p>
+                        <p>{element.comment}</p>
                     </li>
                 ))}
             </ul>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  placeholder="Write a comment!"
+                  autoComplete="off"
+                  name="comment"
+                  className="input rounded"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+              </div><br/>
+              <button type="submit" className="button w-100 rounded">Post</button>
+              </form>
         </div>
     );
 }

@@ -10,6 +10,9 @@ import Comment from './Comments';
 import Dashboard from './dashboard';
 import Logout from './Logout';
 import Complete from './complete';
+import Forum from './forum'
+import Fcomments from './fcomments';
+import Replies from './replies';
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/comment' element={<Comment/>}/>
         <Route path='/logout' element={<Logout />} />
+        <Route path='/forum' element={<Forum />} />
+        <Route path='/fcomments' element={<Fcomments/>} />
+        <Route path='/:id/replies' element={<Replies/>} />
       </Routes>
     </Router>
   );

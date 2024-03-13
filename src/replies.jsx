@@ -7,12 +7,13 @@ const Replies = () => {
     const [title, setTitle] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
-    const [e, setE] = useState("")
+    const [e, setE] = useState()
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`http://localhost:3001/api/create/reply`);
-                setE(res.data.userEmail);
+                setE(res.data.name);
+                console.log("this is replyyy",res.data)
             } catch (error) {
                 if (error.response) {
                     console.error("Server responded with non-success status", error.response.status);
@@ -92,7 +93,7 @@ const Replies = () => {
                     <div className='thread__item'>
                         <p>{reply.text}</p>
                         <div className='react__container'>
-                            <p style={{ opacity: "0.5" }}>by {reply.email}</p>
+                            <p style={{ opacity: "0.5" }}>by {e}</p>
                         </div>
                     </div>
                 ))}
