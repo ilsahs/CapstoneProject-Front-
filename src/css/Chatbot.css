@@ -1,6 +1,4 @@
-/* Chatbot.css */
 
-/* Styling for the floating chat button */
 .floating-chat-btn {
     width: 60px;
     height: 60px;
@@ -35,9 +33,9 @@
 .container {
     background-color: #fff;
     border-radius: 12px;
-    width: 150px; /* Keep the width the same */
-    min-height: 450px; /* Set a minimum height for the container */
-    max-height: 95vh; /* Increase the maximum height if needed */
+    width: 300px; /* Adjusted the width to fit the content */
+    min-height: 450px;
+    max-height: 95vh;
     display: flex;
     flex-direction: column;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -62,68 +60,88 @@
 /* Styling for individual messages */
 .message {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 20px;
     color: white;
-    position: relative; /* For absolute positioning of the avatar */
+    position: relative;
 }
 
 /* Styling for messages from the user */
 .user-message {
     background-color: #9C27B0;
-    align-self: flex-end; /* Align to the right */
-    flex-direction: row-reverse; /* Reverse order so avatar is on the left */
+    align-self: flex-end;
+    flex-direction: row-reverse;
 }
 
 /* Styling for messages from the bot */
 .bot-message {
-    background-color: #442280; /* A different shade of purple for bot messages */
-    align-self: flex-start; /* Align to the left */
-    margin-right: 50px; /* Pushes the message bubble to the left */
+    background-color: #442280;
+    align-self: flex-start;
+    margin-right: 50px;
 }
 
+/* Styling for the input area at the bottom of the chat */
+.input-area {
+    display: flex;
+    align-items: center; /* This ensures vertical alignment of all children */
+    position: relative;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+}
+
+
+/* Styling for the input field */
+.input-field {
+    flex: 1; /* This will allow it to grow and fill the space, adjust the flex value as necessary */
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    margin-right: 10px; /* Give some space between the input field and the camera icon */
+}
+
+
+/* Styling for the send/submit button */
+.submit-button {
+    position: absolute;
+    right: 10px; /* Adjust this value if the button needs more space */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #9C27B0;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 16px; /* Adjust padding to match the size of the button */
+    /* Align text inside the button vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    border: none;
+    white-space: nowrap; /* This prevents the button text from wrapping */
+}
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
     .container {
         width: 90%;
     }
-
-
-/* Styling for the input area at the bottom of the chat */
-.input-area {
-    display: flex; /* Aligns children (text field and button) inline */
-    padding: 10px;
-    background-color: #fff; /* White background for input area */
-    border-top: 1px solid #e0e0e0; /* Light grey border for separation */
 }
 
-/* Styling for the input field */
-.input-field {
-    flex-grow: 1; /* Allows input field to grow and fill the available space */
-    margin-right: 8px; /* Space between the input field and the submit button */
-    border: 1px solid #ced4da; /* Input field border */
-    border-radius: 20px; /* Rounded corners for input field */
+.camera-icon {
+    position: absolute;
+    right: 84px; /* Adjust this value based on the total width of the SEND button */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9C27B0;
+    cursor: pointer;
+    margin-right: 10px;
+    /* Set the size of the icon if needed */
 }
 
-/* Styling for the send/submit button */
-.submit-button {
-    background-color: #9C27B0; /* Purple background to match user messages */
-    color: white; /* White text/icon color */
-    border-radius: 50%; /* Circular shape for the button */
-    padding: 8px; /* Padding inside the button */
-    min-width: 48px; /* Minimum width for the button */
-    min-height: 48px; /* Minimum height to match the input field */
-}
-
-/* Adjustments for the send icon itself, if necessary */
-.submit-button .MuiSvgIcon-root {
-    /* Optional: If you need to adjust the icon size */
-    font-size: 1.5rem; /* Example size, adjust as needed */
-}
-
-
-
+/* Styling for the uploaded image */
+.uploaded-image {
+    max-width: 150px; /* Adjust the maximum width to your desired size */
+    max-height: 150px; /* Adjust the maximum height to your desired size */
+    border-radius: 10px;
 }
