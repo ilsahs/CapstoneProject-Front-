@@ -5,6 +5,9 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import MicIcon from '@mui/icons-material/Mic';
 import './css/Chatbot.css';
 import botAvatar from './assets/botAvatar.png';
+import bot from './assets/new1.png';
+import userAvatar from './assets/userAvatar.png';
+import SendIcon from '@mui/icons-material/Send';
 
 function Chatbot() {
     const [open, setOpen] = useState(false);
@@ -96,8 +99,21 @@ function Chatbot() {
                     <div className="messages-container">
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}-message`}>
-                                {message.text && <span>{message.text}</span>}
-                                {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
+                                 
+                                 {message.sender === 'user' ? (
+                                    <div className="user-avatar avatar-container">
+                                        <Avatar src={userAvatar} className="message-avatar" />
+                                    </div>
+                                ) : (
+                                    <div className="bot1-avatar avatar-container">
+                                        <Avatar src={bot} className="message-avatar" style={{ width: '40px', height: '60px' }} />
+                                    </div>
+                                )}
+
+                                <div className="message-content">
+                                    {message.text && <span>{message.text}</span>}
+                                    {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
+                                </div>
                             </div>
                         ))}
                         <div ref={messagesEndRef} />
@@ -119,9 +135,15 @@ function Chatbot() {
                             style={{ display: 'none' }}
                             onChange={handleFileInputChange}
                         />
-                        <CameraAltIcon className="icon" onClick={handleCameraClick} />
-                        <MicIcon className="icon" onClick={handleMicClick} />
-                        <Button type="submit" color="primary" disabled={loading} className="submit-button">
+                        <CameraAltIcon className="icon camera-icon" onClick={handleCameraClick} />
+                        <MicIcon className="icon mic-icon" onClick={handleMicClick} />
+                        <Button
+                            type="submit"
+                            color="primary"
+                            disabled={loading}
+                            className="submit-button"
+                            endIcon={<SendIcon />}
+                        >
                             Send
                         </Button>
                     </Box>
