@@ -9,17 +9,24 @@ import bot from './assets/new1.png';
 import userAvatar from './assets/userAvatar.png';
 import SendIcon from '@mui/icons-material/Send';
 
+
 function Chatbot() {
     const [open, setOpen] = useState(false);
     const [prompt, setPrompt] = useState('');
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef(null);
+    const recognition = useRef(null);
+    const audioRecorder = useRef(null);
+
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
+    
+    
+     
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -76,9 +83,63 @@ function Chatbot() {
     };
 
     const handleMicClick = () => {
-        // Handle microphone click functionality
-        console.log('Microphone icon clicked');
+        // prompt the user for access to their microphone ({ audio: true })
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                const mediaRecorder = new MediaRecorder(stream);
+                const chunks = [];
+                console.log("Microphone access granted");
+                mediaRecorder.addEventListener('dataavailable', event => {
+                    chunks.push(event.data);
+                });
+    
+                mediaRecorder.addEventListener('stop', () => {
+                    const blob = new Blob(chunks, { type: 'audio/wav' });
+                    const formData = new FormData();
+                    formData.append('file', blob, 'audio.wav'); // Adjust filename and type accordingly
+    
+                    // Send audio file to the backend for transcription
+                    handleAudioInput(formData);
+                });
+    
+                // Start recording
+                mediaRecorder.start();
+    
+                // Stop recording after some duration (e.g., 5 seconds)
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                }, 5000); // Adjust duration as needed
+            })
+            .catch(error => {
+                console.error('Error accessing microphone:', error);
+            });
     };
+    
+    const handleAudioInput = async (formData) => {
+        try {
+            setLoading(true); //indicate that the audio submission is in progress.
+    
+            // Send the recorded audio to the backend for transcription
+            const res = await axios.post('http://localhost:3001/chat', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+    
+            // Assuming the response contains transcribed text, update the messages state
+            const audioUrl = URL.createObjectURL(formData.get('file'));
+            const botResponse = { text: res.data, sender: 'bot' };
+            //containing the audio URL, the audio file itself, and sets the sender as 'user'.
+            const userAudioMessage = { audioUrl: audioUrl, audioFile: formData.get('file'), sender: 'user' };
+            setMessages((currentMessages) => [...currentMessages, userAudioMessage, botResponse]);
+    
+            setLoading(false); //indicate that the audio submission is complete.
+        } catch (error) {
+            console.error('Error submitting audio:', error);
+            setLoading(false);
+        }
+    };
+
 
     return (
         <div className="App">
@@ -113,7 +174,13 @@ function Chatbot() {
                                 <div className="message-content">
                                     {message.text && <span>{message.text}</span>}
                                     {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
-                                </div>
+                                    {message.audioUrl && (
+                                        <audio controls>
+                                            <source src={message.audioUrl} type="audio/wav" />
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    )}
+                                    </div>
                             </div>
                         ))}
                         <div ref={messagesEndRef} />

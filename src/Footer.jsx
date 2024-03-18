@@ -2,6 +2,7 @@ import React from 'react';
 import './css/Footer.css';
 import { Button } from './Button'; 
 import { Link } from 'react-router-dom';
+import LogoFooter from './assets/LOGO3.png';
 
 function Footer() {
   return (
@@ -38,7 +39,7 @@ function Footer() {
         <div className='social-media-wrap'>
           <div className='footer-logo'>
             <Link to='/' className='social-logo'>
-              LOGOHERE <i className='fab fa-typo3' />
+            <img src={LogoFooter} alt='Logo' className='logo-image' />
             </Link>
           </div>
           <div className='social-icons'>
