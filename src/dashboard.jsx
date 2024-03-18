@@ -16,7 +16,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:3001/dashboard');
+                const res = await axios.get('http://qatareventhub.vercel.app/dashboard');
                 setSuc("Successded OK");
                 console.log("Response:", res.data);
                 console.log("Events:", res.data.events); 
