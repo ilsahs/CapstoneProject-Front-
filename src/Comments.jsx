@@ -15,7 +15,7 @@ const Comments = (props) => {
         const fetchData = async () => {
             try {
                 //console.log(props.eventId)
-                const res = await axios.get(`qhttp://qatareventhub.vercel.app/comments/` + props.eventId);
+                const res = await axios.get(`http://qatareventhub.vercel.app/comments/` + props.eventId);
                 setSuc("Successded OK");
                 setE(res.data);
             } catch (error) {
