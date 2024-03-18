@@ -15,7 +15,7 @@ const Comments = (props) => {
         const fetchData = async () => {
             try {
                 //console.log(props.eventId)
-                const res = await axios.get(`qatareventhub.vercel.app/comments/` + props.eventId);
+                const res = await axios.get(`qhttp://qatareventhub.vercel.app/comments/` + props.eventId);
                 setSuc("Successded OK");
                 setE(res.data);
             } catch (error) {
@@ -38,7 +38,7 @@ const Comments = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('qatareventhub.vercel.app/comments', {eventID, newComment, email })
+        axios.post('http://qatareventhub.vercel.app/comments', {eventID, newComment, email })
         .then(res => {
             console.log("posted");
         }).catch(err => console.log(err))
