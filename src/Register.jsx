@@ -11,7 +11,7 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/Register', {Name, Email, Password}).catch(err => console.log(err))
+        axios.post('qatareventhub.vercel.app/Register', {Name, Email, Password}).catch(err => console.log(err))
         .then(res => {
             navigate('/login')}
         )
