@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './Button'; // Ensure this Button component is properly exported and compatible with JSX.
 import { Link, useLocation } from 'react-router-dom';
 import './css/Navbar.css';
+import LogoImage from './assets/LOGO2.png';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -42,7 +43,7 @@ function Navbar() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            LOGOHERE <i className='fab fa-typo3' />
+          <img src={LogoImage} alt='Logo' className='logo-image' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
