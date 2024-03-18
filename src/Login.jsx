@@ -24,7 +24,7 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('qatareventhub.vercel.app/login', {Email, Password})
+        axios.post('http://qatareventhub.vercel.app/login', {Email, Password})
         .then(res => {
             console.log("login: " + res.data);
             console.log("status" + res.data.Status)
