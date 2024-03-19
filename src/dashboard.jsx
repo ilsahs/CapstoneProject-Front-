@@ -4,6 +4,8 @@ import axios from 'axios'
 import Comments from "./Comments";
 import './css/dashboard.css';
 import eventBanner from './assets/event33.jpg'; // Import the banner image
+import Chatbot from './Chatbot'; // Import the Chatbot component
+import Footer from './Footer';
 
 
 function Dashboard() {
@@ -68,6 +70,8 @@ function Dashboard() {
                     ))}
                 </ul>
             </div>
+            <Chatbot/> {/* Include the Chatbot component */}
+            <Footer/> {/* Include the Footer component */}
         </div>
     );
 }
