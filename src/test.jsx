@@ -13,7 +13,7 @@ function Test() {
     axios.defaults.withCredentials = true;
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://qatareventhub.vercel.app/Test', {Email, Password})
+        axios.post('http://localhost:3001/Test', {Email, Password})
         .then(res => {
             setEmail(res)
         }).catch(err => console.log(err))

@@ -24,11 +24,11 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://qatareventhub.vercel.app/login', {Email, Password})
+        axios.post('http://localhost:3001/login', {Email, Password})
         .then(res => {
             console.log("login: " + res.data);
             console.log("status" + res.data.Status)
-            console.log("status" + res.data.Skip)
+            console.log("skip" + res.data.Skip)
             if(res.data.Status === "Success" && res.data.Skip === "true") {
                 navigate("/dashboard",{ state: { token: res.data.token }})
             }

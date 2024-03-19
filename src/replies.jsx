@@ -11,7 +11,7 @@ const Replies = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://qatareventhub.vercel.app/api/create/reply`);
+                const res = await axios.get(`http://localhost:3001/api/create/reply`);
                 setE(res.data.name);
                 console.log("this is replyyy",res.data)
             } catch (error) {
@@ -26,7 +26,7 @@ const Replies = () => {
 
     useEffect(() => {
         const fetchReplies = () => {
-            fetch("http://qatareventhub.vercel.app/api/thread/replies", {
+            fetch("http://localhost:3001/api/thread/replies", {
                 method: "POST",
                 body: JSON.stringify({
                     id,
@@ -46,7 +46,7 @@ const Replies = () => {
     }, [id]);
 
     const addReply = () => {
-        fetch("http://qatareventhub.vercel.app/api/create/reply", {
+        fetch("http://localhost:3001/api/create/reply", {
             method: "POST",
             body: JSON.stringify({
                 id,

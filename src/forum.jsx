@@ -12,7 +12,7 @@ import Footer from './Footer';
 const Forum = () => {
 
     const createThread = () => {
-        fetch("http://qatareventhub.vercel.app/api/create/thread", {
+        fetch("http://localhost:3001/api/create/thread", {
             method: "POST",
             body: JSON.stringify({
                 thread,

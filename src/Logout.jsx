@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const Logout = () => {
     const navigate = useNavigate()
   useEffect(() => {
-    axios.get('http://qatareventhub.vercel.app/logout')
+    axios.get('http://localhost:3001/logout')
     .then(res => {
         if(res.data.logout) {
             navigate('/')
