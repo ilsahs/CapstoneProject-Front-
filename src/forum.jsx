@@ -1,6 +1,6 @@
 
 import Likes from "./likes";
-import Nav from "./nav";
+
 import Fcomments from "./fcomments";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -75,7 +75,7 @@ const Forum = () => {
 
     return (
         <>
-            <Nav />
+            
             <main className='home'>
                 <h2 className='homeTitle'>Create a Thread</h2>
                 <form className='homeForm' onSubmit={handleSubmit}>
