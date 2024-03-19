@@ -3,90 +3,144 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: "Space Grotesk", sans-serif;
+	font-family: "Arial", sans-serif;
 }
+
+/* Form and Link Styles */
 input {
-	padding: 10px 20px;
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	margin-bottom: 15px;
+    color:#0e0b0b;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: calc(100% - 40px);
 }
+
+input::placeholder {
+    color: #999; /* Placeholder text color */
+}
+
 a {
-	text-decoration: none;
+    text-decoration: none;
+    color: #674188;
 }
+
+a:hover {
+    color: #7a4b9c;
+}
+
+/* Container Styles */
 .register,
 .login,
 .home,
 .replies,
 .modal {
-	display: flex;
-	width: 100%;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
-	padding: 30px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    padding: 30px;
 }
+
+/* Title Styles */
 .registerTitle,
 .loginTitle,
 .homeTitle,
 .repliesTitle {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #674188;
 }
+
+/* Form Styles */
 .registerForm,
 .loginForm {
-	width: 80%;
-	display: flex;
-	flex-direction: column;
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/* Button Styles */
 .registerBtn,
 .loginBtn,
 .homeBtn,
 .modalBtn {
-	display: block;
-	width: 200px;
-	padding: 15px;
-	cursor: pointer;
-	outline: none;
-	border: none;
-	border-radius: 3px;
-	font-size: 16px;
-	font-weight: bold;
-	color: #fffbf5;
-	background-color: #674188;
-	margin-bottom: 15px;
+    display: block;
+    width: 200px;
+    padding: 15px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #674188;
+    margin-bottom: 15px;
+    text-align: center;
 }
-.homeForm {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 80%;
-	margin-bottom: 30px;
-}
-.home__container {
-	display: flex;
-	flex-direction: column;
-	width: 75%;
-}
+
 .homeBtn {
-	margin-bottom: 0px;
+    margin-bottom: 0;
 }
+
+/* Home Form Styles */
+.homeForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+/* Home Container Styles */
+.home__container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    max-width: 900px;
+}
+
+/* Thread Container Styles */
 .thread__container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 100%;
-	padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
 }
+
+/* Thread Item Styles */
 .thread__item {
-	padding: 20px;
-	width: 80%;
-	box-shadow: 0 0 1px 1px #c3acd0;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 20px;
+    font-size: 25px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px; /* Rounded corners */
+    background: linear-gradient(135deg, #f8f8f8, #e0e0e0);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.homeTitle {
+    font-size: 50px; /* Larger font size for title */
+    font-weight: bold;
+    color: #674188;
+    margin-top:-200px; /* Optional: Adjust margin as needed */
+}
+.home__container label {
+    font-size: 30px; /* Smaller font size for title/description */
+    color: #0e0b0b;
 }
 .likes__container {
 	display: flex;
@@ -95,7 +149,7 @@ a {
 }
 .likesBtn {
 	height: 30px;
-	color: #f99417;
+	color: #421657;
 	cursor: pointer;
 }
 .react__container {
@@ -123,31 +177,50 @@ a {
 .modal__content > label {
 	margin-bottom: 15px;
 }
-.navbar {
-	width: 100%;
-	padding: 10px 20px;
-	background-color: #674188;
-	display: flex;
-	height: 10vh;
-	align-items: center;
-	justify-content: space-between;
+/* For screens smaller than 768px (e.g., tablets) */
+@media only screen and (max-width: 768px) {
+    .homeTitle {
+        font-size: 40px; /* Decrease font size for smaller screens */
+        margin-top: -150px; /* Adjust margin as needed */
+    }
+    .home__container label {
+        font-size: 24px; /* Decrease font size for smaller screens */
+    }
+    .thread__item {
+        font-size: 20px; /* Decrease font size for smaller screens */
+    }
 }
-.navbar > h2 {
-	color: #fffbf5;
-}
-.navbarRight {
-	display: flex;
-	align-items: center;
-}
-.navbarRight > button {
-	padding: 15px;
-	width: 150px;
-	background-color: #f99417;
-	color: #fffbf5;
-	font-size: 16px;
-	border: none;
-	outline: none;
-	margin-left: 15px;
-	cursor: pointer;
-	border-radius: 3px;
+
+/* For screens smaller than 576px (e.g., mobile devices) */
+@media only screen and (max-width: 576px) {
+    .homeTitle {
+        font-size: 30px; /* Further decrease font size for smaller screens */
+        margin-top: -100px; /* Adjust margin as needed */
+    }
+    .home__container label {
+        font-size: 20px; /* Further decrease font size for smaller screens */
+    }
+    .thread__item {
+        font-size: 16px; /* Further decrease font size for smaller screens */
+    }
+    .register,
+    .login,
+    .home,
+    .replies,
+    .modal {
+        padding: 20px; /* Decrease padding for smaller screens */
+    }
+    .registerForm,
+    .loginForm {
+        width: 90%; /* Adjust form width for smaller screens */
+    }
+    .registerBtn,
+    .loginBtn,
+    .homeBtn,
+    .modalBtn {
+        width: 160px; /* Decrease button width for smaller screens */
+    }
+    .home__container {
+        width: 90%; /* Adjust container width for smaller screens */
+    }
 }
