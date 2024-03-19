@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios'
 import "./forum.css"
+import Chatbot from './Chatbot'; // Import the Chatbot component
+import Footer from './Footer';
+
 const Forum = () => {
 
     const createThread = () => {
@@ -103,6 +106,8 @@ const Forum = () => {
                 ))}
             </div>
             </main>
+            <Chatbot/> {/* Include the Chatbot component */}
+            <Footer/> {/* Include the Footer component */}
         </>
     );
 };
