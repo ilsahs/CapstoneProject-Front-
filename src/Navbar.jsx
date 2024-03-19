@@ -20,7 +20,7 @@ function Navbar() {
     }
   };
 
-  const logoutButton = location.pathname === '/dashboard' ? (
+  const logoutButton = (location.pathname === '/dashboard' || location.pathname === '/forum') ? (
     <li className='nav-item'>
         <Link to='/logout' className='nav-links' onClick={closeMobileMenu}>
             Logout
@@ -55,13 +55,13 @@ function Navbar() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/events' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='./dashboard' className='nav-links' onClick={closeMobileMenu}>
                 Events
               </Link>
             </li>
             <li className='chat'>
-              <Link to='/eventbot' className='nav-links' onClick={closeMobileMenu}>
-                EventBot
+              <Link to='./forum' className='nav-links' onClick={closeMobileMenu}>
+                Forum
               </Link>
             </li>
             <li className='chat'>
