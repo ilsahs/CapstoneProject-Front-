@@ -44,13 +44,13 @@ const Forum = () => {
         const fetchData = async () => {
             try {
                 //console.log(props.eventId)
-                const res = await axios.get(`http://qatareventhub.vercel.app/api/create/thread`);
+                const res = await axios.get(`http://localhost:3001/api/create/thread`);
                 
                 console.log("Response data:", res.data);
                 const email = res.data;
                 //console.log(email)
                 setE(res.data.userEmail);
-                fetch("http://qatareventhub.vercel.app/api/all/threads")
+                fetch("http://localhost:3001/api/all/threads")
                 .then((res) => res.json())
                 .then((data) => setThreadList(data.threads))
                 .catch((err) => console.error(err));
