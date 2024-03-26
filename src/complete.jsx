@@ -10,6 +10,7 @@ function Complete() {
     const [DOB, setDOB] = useState()
     const [Password, setPassword] = useState()
     const [selectedPreferences, setSelectedPreferences] = useState([]);
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     const navigate = useNavigate()
     const location = useLocation();
     const handleSubmit = (e) => {
@@ -22,7 +23,7 @@ function Complete() {
 
     
 
-    axios.post('http://localhost:3001/complete', formData, {
+    axios.post(baseURL+'/complete', formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },

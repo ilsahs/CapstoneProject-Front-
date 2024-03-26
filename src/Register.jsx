@@ -4,6 +4,7 @@ import axios from 'axios'
 import {Link, useNavigate} from 'react-router-dom'
 
 function Signup() {
+  const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     const [Name, setName] = useState()
     const [Email, setEmail] = useState()
     const [Password, setPassword] = useState()
@@ -11,7 +12,7 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/Register', {Name, Email, Password}).catch(err => console.log(err))
+        axios.post(baseURL+'/Register', {Name, Email, Password}).catch(err => console.log(err))
         .then(res => {
             navigate('/login')}
         )

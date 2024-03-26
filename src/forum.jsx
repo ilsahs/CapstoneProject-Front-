@@ -10,9 +10,9 @@ import Chatbot from './Chatbot'; // Import the Chatbot component
 import Footer from './Footer';
 
 const Forum = () => {
-
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     const createThread = () => {
-        fetch("http://localhost:3001/api/create/thread", {
+        fetch(baseURL+"/api/create/thread", {
             method: "POST",
             body: JSON.stringify({
                 thread,
@@ -38,19 +38,20 @@ const Forum = () => {
         setThread("");
     };
     const navigate = useNavigate()
+    
     const [e, setE] = useState("")
     axios.defaults.withCredentials = true;
     useEffect(() => {
         const fetchData = async () => {
             try {
                 //console.log(props.eventId)
-                const res = await axios.get(`http://localhost:3001/api/create/thread`);
+                const res = await axios.get(baseURL+`/api/create/thread`);
                 
                 console.log("Response data:", res.data);
                 const email = res.data;
                 //console.log(email)
                 setE(res.data.userEmail);
-                fetch("http://localhost:3001/api/all/threads")
+                fetch(baseURL+"/api/all/threads")
                 .then((res) => res.json())
                 .then((data) => setThreadList(data.threads))
                 .catch((err) => console.error(err));

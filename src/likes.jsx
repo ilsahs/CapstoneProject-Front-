@@ -5,9 +5,9 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios'
 
 const Likes = ({ numberOfLikes, threadId }) => {
-
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     const handleLikeFunction = () => {
-        fetch("http://localhost:3001/api/thread/like", {
+        fetch(baseURL+"/api/thread/like", {
             method: "POST",
             body: JSON.stringify({
                 threadId,
@@ -32,7 +32,7 @@ const Likes = ({ numberOfLikes, threadId }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost:3001/api/thread/likes`);
+                const res = await axios.get(baseURL+`/api/thread/likes`);
                 setE(res.data.userEmail);
             } catch (error) {
                 if (error.response) {

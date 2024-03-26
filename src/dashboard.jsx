@@ -13,12 +13,13 @@ function Dashboard() {
     const navigate = useNavigate()
     const [events, setEvents] = useState([])
     const [email,setEmail] = useState()
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:3001/dashboard');
+                const res = await axios.get(baseURL+'/dashboard');
                 setSuc("Successded OK");
                 console.log("Response:", res.data);
                 console.log("Events:", res.data.events); 

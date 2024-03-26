@@ -10,12 +10,13 @@ const Comments = (props) => {
     axios.defaults.withCredentials = true;
     const [newComment, setNewComment] = useState()
     const [eventID, seteventID] = useState(props.eventId)
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     const [email, setemail] = useState(props.email)
     useEffect(() => {
         const fetchData = async () => {
             try {
                 //console.log(props.eventId)
-                const res = await axios.get(`http://localhost:3001/comments/` + props.eventId);
+                const res = await axios.get(baseURL+`/comments/` + props.eventId);
                 setSuc("Successded OK");
                 setE(res.data);
             } catch (error) {
@@ -38,7 +39,7 @@ const Comments = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/comments', {eventID, newComment, email })
+        axios.post(baseURL+'/comments', {eventID, newComment, email })
         .then(res => {
             console.log("posted");
         }).catch(err => console.log(err))

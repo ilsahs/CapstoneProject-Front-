@@ -11,7 +11,7 @@ function Login() {
     const [message, setMessage] = useState('');
     const navigate = useNavigate()
     const location = useLocation();  
-
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     axios.defaults.withCredentials = true;
     useEffect(() => {
       // Checking to see if navigated back to login
@@ -24,7 +24,7 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3001/login', {Email, Password})
+        axios.post( baseURL + '/login', {Email, Password})
         .then(res => {
             console.log("login: " + res.data);
             console.log("status" + res.data.Status)

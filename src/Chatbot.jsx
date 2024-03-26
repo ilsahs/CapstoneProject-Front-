@@ -29,7 +29,7 @@ function Chatbot() {
      
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!prompt.trim()) return;
@@ -40,7 +40,7 @@ function Chatbot() {
         setPrompt('');
 
         try {
-            const res = await axios.post('http://localhost:3001/chat', { prompt });
+            const res = await axios.post(baseURL +'/chat', { prompt });
             const botResponse = { text: res.data, sender: 'bot' };
             setMessages((currentMessages) => [...currentMessages, botResponse]);
         } catch (error) {
@@ -61,7 +61,7 @@ function Chatbot() {
             const userImage = { imageUrl: URL.createObjectURL(file), sender: 'user' };
             setMessages((currentMessages) => [...currentMessages, userImage]);
             
-            const res = await axios.post('http://localhost:3001/chat', formData, {
+            const res = await axios.post(baseURL + '/chat', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -120,7 +120,7 @@ function Chatbot() {
             setLoading(true); //indicate that the audio submission is in progress.
     
             // Send the recorded audio to the backend for transcription
-            const res = await axios.post('http://localhost:3001/chat', formData, {
+            const res = await axios.post(baseURL+'/chat', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 const Replies = () => {
+    const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     const [replyList, setReplyList] = useState([]);
     const [reply, setReply] = useState("");
     const [title, setTitle] = useState("");
@@ -11,7 +12,7 @@ const Replies = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost:3001/api/create/reply`);
+                const res = await axios.get(baseURL+`/api/create/reply`);
                 setE(res.data.name);
                 console.log("this is replyyy",res.data)
             } catch (error) {
@@ -26,7 +27,7 @@ const Replies = () => {
 
     useEffect(() => {
         const fetchReplies = () => {
-            fetch("http://localhost:3001/api/thread/replies", {
+            fetch(baseURL+"/api/thread/replies", {
                 method: "POST",
                 body: JSON.stringify({
                     id,
@@ -46,7 +47,7 @@ const Replies = () => {
     }, [id]);
 
     const addReply = () => {
-        fetch("http://localhost:3001/api/create/reply", {
+        fetch(baseURL+"/api/create/reply", {
             method: "POST",
             body: JSON.stringify({
                 id,
