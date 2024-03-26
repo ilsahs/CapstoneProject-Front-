@@ -1,5 +1,6 @@
 .navbar {
-  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  background-color: #F0F0E9; /* Initial background color */
+  color: black; /* Font color */
   height: 80px;
   display: flex;
   justify-content: center;
@@ -10,29 +11,20 @@
   z-index: 999;
 }
 
+
 .navbar-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80px;
-  max-width: 1500px;
+  height: 100%;
+  max-width: 100%;
 }
 
-.navbar-logo {
-  color: #fff;
-  justify-self: start;
-  margin-left: 20px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-}
+
 .logo-image {
-  width: 240px; /* Fixed width for the logo */
-  height: auto; /* Maintain aspect ratio */
-  /*margin-left: 300px;  Adjust margin for spacing between logo and other elements */
+  width: 48%;
 }
+
 @media (max-width: 768px) {
   .logo-image {
     margin-top:-6px;
@@ -55,7 +47,7 @@
 .nav-menu {
   display: grid;
   grid-template-columns: repeat(8, auto);
-  grid-gap: 10px;
+  grid-gap: 2%;
   list-style: none;
   text-align: center;
   width: 60vw;
@@ -63,12 +55,10 @@
   margin-right: 2rem;
 }
 
-.nav-item {
-  height: 80px;
-}
+
 
 .nav-links {
-  color: #fff;
+  color: black;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -77,12 +67,14 @@
 }
 
 .nav-links:hover {
-  border-bottom: 4px solid #fff;
+  border-bottom: 4px solid black;
   transition: all 0.2s ease-out;
+  background-color: #e2e2dd;
+  width: 120%;
 }
 
 .fa-bars {
-  color: #fff;
+  color: #F0F0E9;
 }
 
 .nav-links-mobile {
@@ -108,10 +100,11 @@
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
+
   }
 
   .nav-menu.active {
-    background: #242222;
+    background: #F0F0E9;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -126,7 +119,7 @@
   }
 
   .nav-links:hover {
-    background-color: #fff;
+    background-color:  #e2e2dd;
     color: #242424;
     border-radius: 0;
   }
@@ -139,8 +132,8 @@
   }
   .logo-image {
     margin-top:-6px;
-    width: 180px; /* Adjust width for smaller screens */
-    height: 50px;; /* Automatically adjust height */
+    width: 100%; /* Adjust width for smaller screens */
+    height: 50px; /* Automatically adjust height */
   }
 
   .menu-icon {
@@ -151,10 +144,11 @@
     transform: translate(-100%, 60%);
     font-size: 1.8rem;
     cursor: pointer;
+    background-color: black;
   }
 
   .fa-times {
-    color: #fff;
+    color: white;
     font-size: 2rem;
   }
 
@@ -163,19 +157,19 @@
     text-align: center;
     margin: 2rem auto;
     border-radius: 4px;
-    width: 80%;
+    width: 26%;
     text-decoration: none;
-    font-size: 1.5rem;
-    background-color: transparent;
-    color: #fff;
+    font-size: 120%;
+    background-color: #F0F0E9;
+    color: black;
     padding: 14px 20px;
-    border: 1px solid #fff;
+    border: 1px solid black;
     transition: all 0.3s ease-out;
   }
 
   .nav-links-mobile:hover {
-    background: #fff;
-    color: #242424;
-    transition: 250ms;
+    background-color: #e2e2dd; 
+    color: black;
   }
+  
 }
