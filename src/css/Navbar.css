@@ -18,13 +18,34 @@
   max-width: 1500px;
 }
 
-
-
-.logo-image {
-  max-height: 200px; 
-  max-width: 150px; 
+.navbar-logo {
+  color: #fff;
+  justify-self: start;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
 }
-
+.logo-image {
+  width: 240px; /* Fixed width for the logo */
+  height: auto; /* Maintain aspect ratio */
+  /*margin-left: 300px;  Adjust margin for spacing between logo and other elements */
+}
+@media (max-width: 768px) {
+  .logo-image {
+    margin-top:-6px;
+    width: 170px; /* Adjust width for smaller screens */
+    height: auto; /* Automatically adjust height */
+  }
+  .navbar-logo {
+    position: absolute;
+    top: 0;
+    left: 50%; /* Position the logo at the center horizontally */
+    transform: translateX(-50%); /* Adjust horizontally to center */
+  }
+}
 
 .fa-typo3 {
   margin-left: 0.5rem;
@@ -33,7 +54,7 @@
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(8, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
@@ -115,6 +136,11 @@
     top: 0;
     left: 0;
     transform: translate(25%, 50%);
+  }
+  .logo-image {
+    margin-top:-6px;
+    width: 180px; /* Adjust width for smaller screens */
+    height: 50px;; /* Automatically adjust height */
   }
 
   .menu-icon {
