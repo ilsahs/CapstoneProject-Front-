@@ -13,6 +13,7 @@ import Complete from './complete';
 import Forum from './forum'
 import Fcomments from './fcomments';
 import Replies from './replies';
+import Page from './Page';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path='/forum' element={<Forum />} />
         <Route path='/fcomments' element={<Fcomments/>} />
         <Route path='/:id/replies' element={<Replies/>} />
+        <Route path='/page' element={<Page/>}></Route>
       </Routes>
     </Router>
   );
