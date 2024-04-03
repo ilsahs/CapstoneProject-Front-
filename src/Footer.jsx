@@ -2,7 +2,7 @@ import React from 'react';
 import './css/Footer.css';
 import { Button } from './Button'; 
 import { Link } from 'react-router-dom';
-import LogoFooter from './assets/LOGO3.png';
+import LogoFooter from './assets/log23.jpg';
 
 function Footer() {
   return (
