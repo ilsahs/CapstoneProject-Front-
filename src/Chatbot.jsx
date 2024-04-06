@@ -9,27 +9,24 @@ import bot from './assets/new1.png';
 import userAvatar from './assets/userAvatar.png';
 import SendIcon from '@mui/icons-material/Send';
 
-
 function Chatbot() {
     const [open, setOpen] = useState(false);
     const [prompt, setPrompt] = useState('');
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [isBotTyping, setIsBotTyping] = useState(false);
     const messagesEndRef = useRef(null);
     const recognition = useRef(null);
     const audioRecorder = useRef(null);
-
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
-    
-    
-     
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!prompt.trim()) return;
@@ -40,14 +37,16 @@ function Chatbot() {
         setPrompt('');
 
         try {
+            setIsBotTyping(true);
             const res = await axios.post(baseURL +'/chat', { prompt });
             const botResponse = { text: res.data, sender: 'bot' };
             setMessages((currentMessages) => [...currentMessages, botResponse]);
         } catch (error) {
             console.error('Error submitting query:', error);
+        } finally {
+            setLoading(false);
+            setIsBotTyping(false);
         }
-
-        setLoading(false);
     };
 
     const handleFileInputChange = async (e) => {
@@ -57,7 +56,6 @@ function Chatbot() {
 
         try {
             setLoading(true);
-            // Add the user's uploaded image to the chat history
             const userImage = { imageUrl: URL.createObjectURL(file), sender: 'user' };
             setMessages((currentMessages) => [...currentMessages, userImage]);
             
@@ -70,9 +68,9 @@ function Chatbot() {
             setMessages((currentMessages) => [...currentMessages, botResponse]);
         } catch (error) {
             console.error('Error submitting image:', error);
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     const handleCameraClick = () => {
@@ -83,7 +81,6 @@ function Chatbot() {
     };
 
     const handleMicClick = () => {
-        // prompt the user for access to their microphone ({ audio: true })
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
                 const mediaRecorder = new MediaRecorder(stream);
@@ -96,19 +93,14 @@ function Chatbot() {
                 mediaRecorder.addEventListener('stop', () => {
                     const blob = new Blob(chunks, { type: 'audio/wav' });
                     const formData = new FormData();
-                    formData.append('file', blob, 'audio.wav'); // Adjust filename and type accordingly
-    
-                    // Send audio file to the backend for transcription
+                    formData.append('file', blob, 'audio.wav');
                     handleAudioInput(formData);
                 });
     
-                // Start recording
                 mediaRecorder.start();
-    
-                // Stop recording after some duration (e.g., 5 seconds)
                 setTimeout(() => {
                     mediaRecorder.stop();
-                }, 5000); // Adjust duration as needed
+                }, 5000);
             })
             .catch(error => {
                 console.error('Error accessing microphone:', error);
@@ -117,29 +109,22 @@ function Chatbot() {
     
     const handleAudioInput = async (formData) => {
         try {
-            setLoading(true); //indicate that the audio submission is in progress.
-    
-            // Send the recorded audio to the backend for transcription
+            setLoading(true);
             const res = await axios.post(baseURL+'/chat', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-    
-            // Assuming the response contains transcribed text, update the messages state
             const audioUrl = URL.createObjectURL(formData.get('file'));
             const botResponse = { text: res.data, sender: 'bot' };
-            //containing the audio URL, the audio file itself, and sets the sender as 'user'.
             const userAudioMessage = { audioUrl: audioUrl, audioFile: formData.get('file'), sender: 'user' };
             setMessages((currentMessages) => [...currentMessages, userAudioMessage, botResponse]);
-    
-            setLoading(false); //indicate that the audio submission is complete.
         } catch (error) {
             console.error('Error submitting audio:', error);
+        } finally {
             setLoading(false);
         }
     };
-
 
     return (
         <div className="App">
@@ -160,8 +145,7 @@ function Chatbot() {
                     <div className="messages-container">
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}-message`}>
-                                 
-                                 {message.sender === 'user' ? (
+                                {message.sender === 'user' ? (
                                     <div className="user-avatar avatar-container">
                                         <Avatar src={userAvatar} className="message-avatar" />
                                     </div>
@@ -170,7 +154,6 @@ function Chatbot() {
                                         <Avatar src={bot} className="message-avatar" style={{ width: '40px', height: '60px' }} />
                                     </div>
                                 )}
-
                                 <div className="message-content">
                                     {message.text && <span>{message.text}</span>}
                                     {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
@@ -180,12 +163,14 @@ function Chatbot() {
                                             Your browser does not support the audio element.
                                         </audio>
                                     )}
-                                    </div>
+                                </div>
                             </div>
                         ))}
                         <div ref={messagesEndRef} />
                     </div>
                     <Box className="input-area" component="form" onSubmit={handleSubmit}>
+                        {/* Typing indicator */}
+                        {isBotTyping && <span className="typing-indicator">Eventbot is typing...</span>}
                         <TextField
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
