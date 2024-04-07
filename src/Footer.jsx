@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <div className='footer-container'>
-      <p className='footer-description'>Dive into the vibrant world of events with us – Your Key to Endless Entertainment!</p>
+
       <div className='footer-section'>
         <h2>Quick Links</h2>
         <ul>
