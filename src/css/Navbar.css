@@ -87,6 +87,7 @@
 
 .nav-links-mobile {
   display: none;
+  
 }
 
 .menu-icon {
@@ -99,15 +100,17 @@
   }
 
   .nav-menu {
+    height: calc(100vh - 80px); /* Subtracting the height of the navbar */
     display: flex;
     flex-direction: column;
+    justify-content: flex-end; /* Align items to the bottom */
+    padding-bottom: 80px; /* Add space at the bottom for the navbar */
+    position: fixed; /* Fix the navbar to prevent scrolling */
+    top: 80px; /* Position below the navbar */
+    left: 0;
     width: 100%;
-    height: 90vh;
-    position: absolute;
-    top: 80px;
-    left: -100%;
-    opacity: 1;
-    transition: all 0.5s ease;
+    background-color: #242222;
+    z-index: 1;
   }
 
   .nav-menu.active {
@@ -168,9 +171,11 @@
     font-size: 1.5rem;
     background-color: transparent;
     color: #fff;
-    padding: 14px 20px;
+    padding: 8px 12px;
     border: 1px solid #fff;
     transition: all 0.3s ease-out;
+    width: 110px;
+    font-size: 18px;
   }
 
   .nav-links-mobile:hover {
