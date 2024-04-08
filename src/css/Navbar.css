@@ -100,17 +100,15 @@
   }
 
   .nav-menu {
-    height: calc(100vh - 80px); /* Subtracting the height of the navbar */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Align items to the bottom */
-    padding-bottom: 80px; /* Add space at the bottom for the navbar */
-    position: fixed; /* Fix the navbar to prevent scrolling */
-    top: 80px; /* Position below the navbar */
-    left: 0;
     width: 100%;
-    background-color: #242222;
-    z-index: 1;
+    height: 90vh;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
   }
 
   .nav-menu.active {
@@ -119,6 +117,12 @@
     opacity: 1;
     transition: all 0.5s ease;
     z-index: 1;
+    width: 100%; /* Ensure it covers the whole screen */
+    height: 100vh; /* Make it full height */
+    display: flex; /* Center items vertically */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
   }
 
   .nav-links {
@@ -166,16 +170,16 @@
     text-align: center;
     margin: 2rem auto;
     border-radius: 4px;
-    width: 80%;
     text-decoration: none;
     font-size: 1.5rem;
     background-color: transparent;
     color: #fff;
-    padding: 8px 12px;
+    padding: 14px 20px;
     border: 1px solid #fff;
     transition: all 0.3s ease-out;
-    width: 110px;
-    font-size: 18px;
+    max-width: 200px; /* Limit maximum width */
+    box-sizing: border-box; 
+    font-size: 20px;
   }
 
   .nav-links-mobile:hover {
