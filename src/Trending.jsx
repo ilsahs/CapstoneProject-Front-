@@ -17,11 +17,13 @@ function Trending() {
         </video>
       </div>
       <div className="about-us">
-      <h2>About Us</h2>
-      <p>Welcome to Qatar Events, your ultimate destination for discovering upcoming and trending events happening in Qatar! Whether you're a local resident or a visitor to this vibrant country, we're here to help you stay informed about the latest happenings, from cultural festivals to sports events, concerts, exhibitions, and much more.</p>
+      {/* <h2>About Us</h2> */}
+      {/* <p>Welcome to Qatar Events, your ultimate destination for discovering upcoming and trending events happening in Qatar! Whether you're a local resident or a visitor to this vibrant country, we're here to help you stay informed about the latest happenings, from cultural festivals to sports events, concerts, exhibitions, and much more.</p>
       <p>At Qatar Events, we're passionate about connecting people with enriching experiences and creating memorable moments. Our dedicated team works tirelessly to curate a diverse range of events, ensuring there's something for everyone to enjoy.</p>
-      <p>Join us in celebrating the vibrant cultural scene and dynamic community spirit of Qatar. Let Qatar Events be your guide to the best that this beautiful country has to offer!</p>
+      <p>Join us in celebrating the vibrant cultural scene and dynamic community spirit of Qatar. Let Qatar Events be your guide to the best that this beautiful country has to offer!</p> */}
 
+      <p> Discover upcoming events in Qatar! Whether you're a local or a visitor, Qatar Events keeps you informed. From cultural festivals to sports and concerts, we've got you covered. </p>
+      <p>  Join us and experience Qatar's vibrant cultural scene! Stay tuned for updates on exclusive events and exciting happenings happening across the country. With Qatar Events, your ultimate guide to all things entertainment, you'll never miss out on the action.</p>
       </div>
 
       <div className="categories-container">
