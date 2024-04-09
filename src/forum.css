@@ -185,6 +185,9 @@ a:hover {
     color: #333;
     text-align: center;
 }
+.footer-wrapper {
+    padding-top: 240px; /* Same value as the negative margin-top on .thread-wrapper */
+  }
 
 /* Thread Container Styles */
 .thread__container {

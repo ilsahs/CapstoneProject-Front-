@@ -116,7 +116,9 @@ const Forum = () => {
                 ))}
             </div>
             <Chatbot/> {/* Include the Chatbot component */}
-            <Footer/>{/* Include the Footer component */}
+            <div className="footer-wrapper">
+                <Footer />
+            </div>
         </>
     );
 };
