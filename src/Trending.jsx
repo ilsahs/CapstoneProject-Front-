@@ -5,8 +5,51 @@ import SportsImage from './assets/sports.jpg';
 import ArtsImage from './assets/arts.jpg';
 import './css/Trending.css';
 import CREATEVideo from './assets/CREATE.mp4';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Trending() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        axios.defaults.withCredentials = true;
+        const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
+
+        const currentDate = new Date();
+        const firstDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
+        const lastDayOfWeek = new Date(firstDayOfWeek);
+        lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+              
+        const startDateString = firstDayOfWeek.toISOString();
+        const endDateString = lastDayOfWeek.toISOString();
+        console.log(startDateString)
+        console.log(endDateString)
+        const response = await axios.get(baseURL+`/events/this-week/` + `${startDateString} - ${endDateString}`);
+        setEvents(response.data);
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
+      fetchEvents();
+    }, []);
+
+
+    const formatDate = (dateString) => {
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      const date = new Date(dateString);
+      console.log(date)
+      const formattedDate = date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
+      const [day, month, year] = formattedDate.split("/");
+
+      const monthName = monthNames[parseInt(month) - 1];
+      console.log(monthName)
+      const form = `${day} ${monthName} ${year}`;
+      return form;
+    }  
+
   return (
     <div className="trending-container">
      
@@ -50,6 +93,22 @@ function Trending() {
           <h2>Arts and Culture</h2>
           <h3>Arts and Culture</h3>
         </div>
+      </div>
+
+      <div className="events-container">
+        <h2>Events This Week</h2>
+          {Array.isArray(events) && events.map(event => (
+            <div className="event" key={event._id}>
+              <div className="category">
+              <img src={event.image} height alt={event.name} />
+                <h3>{event.name}</h3>
+                <p>{event.description}</p>
+                <p>Date: {formatDate(event.startDate)}</p>
+                <p>Time: {event.time}</p>
+                <p>Location: {event.location}</p>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
