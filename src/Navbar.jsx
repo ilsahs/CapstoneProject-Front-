@@ -59,12 +59,12 @@ function Navbar() {
                 Events
               </Link>
             </li>
-            <li className='chat'>
+            <li className='nav-item'>
               <Link to='./forum' className='nav-links' onClick={closeMobileMenu}>
                 Forum
               </Link>
             </li>
-            <li className='chat'>
+            <li className='nav-item'>
               <Link to='/favorites' className='nav-links' onClick={closeMobileMenu}>
                 Favorites
               </Link>
