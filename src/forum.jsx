@@ -112,11 +112,11 @@ const Forum = () => {
                             <Fcomments numberOfComments={thread.replies.length} threadId={thread.id} title={thread.title} />
                         </div>
                     </div>
+                    
                 ))}
             </div>
-            
             <Chatbot/> {/* Include the Chatbot component */}
-            <Footer/> {/* Include the Footer component */}
+            <Footer/>{/* Include the Footer component */}
         </>
     );
 };
