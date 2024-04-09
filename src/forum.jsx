@@ -1,6 +1,6 @@
 
 import Likes from "./likes";
-
+import BannerImage from './assets/forum2.jpg';
 import Fcomments from "./fcomments";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -79,11 +79,18 @@ const Forum = () => {
 
     return (
         <>
-            
+            <div className="banner-container">
+            <img src={BannerImage} alt="Banner" className="banner-image" />
+            <div className="banners-text">
+                <h2>Join the Conversation</h2>
+                <p>Share Your Event Experiences and Insights!</p>
+            </div>
+        </div>
+        
             <main className='home'>
-                <h2 className='homeTitle'>Create a Thread</h2>
                 <form className='homeForm' onSubmit={handleSubmit}>
                     <div className='home__container'>
+                    <h2 className='forumTitle'>Create a Thread</h2>
                         <label htmlFor='thread'>Title / Description</label>
                         <input
                             type='text'
@@ -95,6 +102,7 @@ const Forum = () => {
                     </div>
                     <button className='homeBtn'>CREATE THREAD</button>
                 </form>
+                </main>
                 <div className='thread__container'>
                 {threadList.map((thread) => (
                     <div className='thread__item' key={thread.id}>
@@ -106,7 +114,7 @@ const Forum = () => {
                     </div>
                 ))}
             </div>
-            </main>
+            
             <Chatbot/> {/* Include the Chatbot component */}
             <Footer/> {/* Include the Footer component */}
         </>

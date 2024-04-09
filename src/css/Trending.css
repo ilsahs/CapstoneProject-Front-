@@ -2,14 +2,15 @@
   background-color: white;
   padding: 30px;
   display: flex;
-  flex-wrap: wrap; /* Ensure items wrap to the next line if there's not enough space */
-  justify-content: center; /* Center items horizontally */
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .video-container {
   position: relative;
   margin-bottom: 20px;
   z-index: 1;
+  transition: margin 0.5s ease; /* Add transition property */
 }
 
 .create {
@@ -34,7 +35,7 @@
   margin: 0;
   margin-bottom: 20px;
   text-align: center;
-  width: 100%; /* Ensure the heading takes up full width */
+  width: 100%;
 }
 
 .categories-container {
@@ -84,39 +85,59 @@
 .category:hover h2 {
   opacity: 1;
 }
+
 .about-us h2 {
-  font-size: 28px; /* Adjust the font size */
-  color: #333; /* Change the text color */
-  margin-bottom: 15px; /* Add some bottom margin */
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 15px;
 }
 
 .about-us p {
-  font-size: 16px; /* Adjust the font size */
-  color: #666; /* Change the text color */
-  line-height: 1.6; /* Increase the line height for better readability */
-  margin-bottom: 10px; /* Add some bottom margin */
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 768px) {
   .video-container {
-    width: 40%; /* Adjust the width of the video */
-    margin-right: 0px; /* Add space between video and about-us */
-    margin-left:200px;
+    width: 40%;
+    margin-right: 0px;
+    margin-left: 200px;
     margin-bottom: 60px;
   }
 
   .about-us {
-    margin-top: 0; /* Remove top margin */
-    margin-left: 20px; /* Remove left margin */
+    margin-top: 0;
+    margin-left: 20px;
     margin-right: 180px;
-    flex: 1; /* Allow about-us to grow and take remaining space */
+    flex: 1;
   }
+
   .about-us h2 {
-    font-size: 24px; /* Decrease font size for smaller screens */
+    font-size: 24px;
   }
 
   .about-us p {
-    font-size: 14px; /* Decrease font size for smaller screens */
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .video-container {
+    width: 80%;
+    margin: 0 auto 20px;
+  }
+
+  .create {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .about-us {
+    margin-top: 20px; 
+    margin-left: 10px; 
+    margin-right: 10px; 
   }
 }
 
