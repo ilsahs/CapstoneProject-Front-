@@ -40,6 +40,36 @@ function Dashboard() {
         fetchData();
     }, [navigate]);
 
+    const formatDate = (dateString) => {
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const date = new Date(dateString);
+
+        let day = date.getDate() - 1;
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let monthName;
+
+        if (month == 2 && day == 0){
+            day = 28
+        }
+        else if (month % 2 == 1 && day == 0){
+            day = 30
+            month = month - 1
+        }
+        else if (month % 2 == 0 && day == 0){
+            if (month == 1){
+                month = 12
+            }
+            else{ 
+                month = month - 1
+            }
+            day = 31          
+        }
+
+        monthName = monthNames[parseInt(month) - 1];
+        return `${day} ${monthName} ${year}`;
+    }  
+
     return (
         <div>
             <div className="banner">
@@ -56,7 +86,7 @@ function Dashboard() {
                             <img src={event.image} alt="Event" />
                             <div className="event-details">
                                 <p><b>Title: {event.title}</b></p>
-                                <p>Date: {event.date}</p>
+                                <p>Date: {formatDate(event.startDate)} {event.endDate? " - " + formatDate(event.endDate): null}</p>
                                 <p>Time: {event.time}</p>
                                 <p>Location: {event.location}</p>
                                 <p>Category: {event.category}</p>
