@@ -5,6 +5,38 @@
 	padding: 0;
 	font-family: "Arial", sans-serif;
 }
+.banner-container {
+    position: relative;
+    width: 100%; /* Make the banner full width */
+    overflow: hidden; /* Ensure the text doesn't overflow outside the banner */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.banner-image {
+    width: 100%; /* Make the image inside the banner full width */
+    display: block;
+    height:500px;
+    filter: brightness(75%);
+}
+.banners-text {
+    position: absolute;
+    top: 40%; /* Center the text vertically */
+    left: 50%; /* Center the text horizontally */
+    transform: translate(-50%, -50%); /* Center the text */
+    color: white; /* Text color */
+    font-family: 'Arial', sans-serif; /* Change font family */
+    text-align: center; /* Align text center */
+}
+
+.banners-text h2 {
+    margin-bottom: 10px;
+    font-size: 60px; /* Adjust font size */
+}
+
+.banners-text p {
+    margin: 0;
+    font-size: 30px; /* Adjust font size */
+}
 
 /* Form and Link Styles */
 input {
@@ -35,13 +67,14 @@ a:hover {
 .home,
 .replies,
 .modal {
+    position: relative;
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 50vh;
-    padding: 30px;
+    padding: 0px;
 }
 
 /* Title Styles */
@@ -68,7 +101,7 @@ a:hover {
 /* Button Styles */
 .registerBtn,
 .loginBtn,
-.homeBtn,
+
 .modalBtn {
     display: block;
     width: 200px;
@@ -84,6 +117,23 @@ a:hover {
     margin-bottom: 15px;
     text-align: center;
 }
+.homeBtn {
+    display: block;
+    width: 40%;
+    padding: 10px;
+    background-color: #421657;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+.homeBtn:hover {
+    background-color: #0d233a;
+}
 
 .homeBtn {
     margin-bottom: 0;
@@ -91,24 +141,54 @@ a:hover {
 
 /* Home Form Styles */
 .homeForm {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     width: 80%;
     max-width: 600px;
-    margin-bottom: 30px;
+    margin: -320px auto 0; /* Adjust top margin to 5px */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 24px rgba(0, 0, 0, 0.3); /* Heavy box shadow */
+    background: linear-gradient(135deg, #c5c1c1, #f0f0f0); /* Gradient background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+    padding: 20px; /* Padding for inner content */
+    display: flex;
+    flex-direction: column;  /* Ensure elements stack vertically */
+   
+}
+.homeForm > * {
+    margin-bottom: 15px; /* Add space between form elements */
+}
+
+.homeForm > :last-child {
+    margin-bottom: 0; /* Remove bottom margin from the last element */
+}
+.home__container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.forumTitle {
+    margin-bottom: 20px; /* Add bottom margin */
+    font-size: 40px;
+    color: #531f68;
+    text-align: center; /* Center-align the text */
 }
 
 /* Home Container Styles */
 .home__container {
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-    max-width: 900px;
+    width: 100%; /* Ensure the container spans the entire width */
+    max-width: 100%; /* Ensure the container spans the entire width */
+    text-align: center; /* Center align the container's content */
+}
+/* Title Button Styling */
+.homeTitle {
+    margin: 0 0 20px 0; /* Add bottom margin to separate from other elements */
+    font-size: 24px;
+    color: #333;
+    text-align: center;
 }
 
 /* Thread Container Styles */
 .thread__container {
+    margin-top:-280px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,7 +219,7 @@ a:hover {
     margin-top:-200px; /* Optional: Adjust margin as needed */
 }
 .home__container label {
-    font-size: 30px; /* Smaller font size for title/description */
+    font-size: 25px; /* Smaller font size for title/description */
     color: #0e0b0b;
 }
 .likes__container {
@@ -179,6 +259,27 @@ a:hover {
 }
 /* For screens smaller than 768px (e.g., tablets) */
 @media only screen and (max-width: 768px) {
+    .forumTitle{
+        font-size: 40px;
+    }
+    .banner-image{
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensure the image covers the entire container */
+    }
+    .banners-text {
+        width: 90%; /* Adjust width for better fit on smaller screens */
+        max-width: 300px; /* Limit maximum width to prevent text from spanning too wide */
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .banners-text h2 {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    .banners-text p {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
     .homeTitle {
         font-size: 40px; /* Decrease font size for smaller screens */
         margin-top: -150px; /* Adjust margin as needed */
@@ -193,6 +294,13 @@ a:hover {
 
 /* For screens smaller than 576px (e.g., mobile devices) */
 @media only screen and (max-width: 576px) {
+    .homeForm {
+        width:350px;
+        margin-top: -220px; /* Adjust top margin for even smaller screens */
+    }
+    .forumTitle{
+        font-size: 30px;
+    }
     .homeTitle {
         font-size: 30px; /* Further decrease font size for smaller screens */
         margin-top: -100px; /* Adjust margin as needed */
@@ -208,6 +316,7 @@ a:hover {
     .home,
     .replies,
     .modal {
+        margin-top: -100px;
         padding: 20px; /* Decrease padding for smaller screens */
     }
     .registerForm,
@@ -222,5 +331,10 @@ a:hover {
     }
     .home__container {
         width: 90%; /* Adjust container width for smaller screens */
+    }
+    .banner-image {
+        max-width: 100%; /* Ensure the image fits within the screen width */
+        height: auto; /* Maintain aspect ratio */
+        /* Add any additional styles specific to extra-small screens */
     }
 }
