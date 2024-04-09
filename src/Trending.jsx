@@ -35,7 +35,20 @@ function Trending() {
       fetchEvents();
     }, []);
 
-    
+
+    const formatDate = (dateString) => {
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      const date = new Date(dateString);
+      console.log(date)
+      const formattedDate = date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
+      const [day, month, year] = formattedDate.split("/");
+
+      const monthName = monthNames[parseInt(month) - 1];
+      console.log(monthName)
+      const form = `${day} ${monthName} ${year}`;
+      return form;
+    }  
 
   return (
     <div className="trending-container">
@@ -84,11 +97,11 @@ function Trending() {
         <h2>Events This Week</h2>
           {Array.isArray(events) && events.map(event => (
             <div className="event" key={event._id}>
-              <img src={event.image} alt={event.name} />
-              <div className="event-details">
+              <div className="category">
+              <img src={event.image} height alt={event.name} />
                 <h3>{event.name}</h3>
                 <p>{event.description}</p>
-                <p>Date: {event.startDate}</p>
+                <p>Date: {formatDate(event.startDate)}</p>
                 <p>Time: {event.time}</p>
                 <p>Location: {event.location}</p>
               </div>
