@@ -24,8 +24,7 @@ function Trending() {
               
         const startDateString = firstDayOfWeek.toISOString();
         const endDateString = lastDayOfWeek.toISOString();
-        console.log(startDateString)
-        console.log(endDateString)
+       
         const response = await axios.get(baseURL+`/events/this-week/` + `${startDateString} - ${endDateString}`);
         setEvents(response.data);
       } catch (error) {
@@ -38,16 +37,32 @@ function Trending() {
 
     const formatDate = (dateString) => {
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
       const date = new Date(dateString);
-      console.log(date)
-      const formattedDate = date.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
-      const [day, month, year] = formattedDate.split("/");
 
-      const monthName = monthNames[parseInt(month) - 1];
-      console.log(monthName)
-      const form = `${day} ${monthName} ${year}`;
-      return form;
+      let day = date.getDate() - 1;
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+      let monthName;
+
+      if (month == 2 && day == 0){
+          day = 28
+      }
+      else if (month % 2 == 1 && day == 0){
+          day = 30
+          month = month - 1
+      }
+      else if (month % 2 == 0 && day == 0){
+          if (month == 1){
+              month = 12
+          }
+          else{ 
+              month = month - 1
+          }
+          day = 31          
+      }
+
+      monthName = monthNames[parseInt(month) - 1];
+      return `${day} ${monthName} ${year}`;
     }  
 
   return (
@@ -99,9 +114,9 @@ function Trending() {
             <div className="event" key={event._id}>
               <div className="category">
               <img src={event.image} height alt={event.name} />
-                <h3>{event.name}</h3>
+                <h3>{event.title}</h3>
                 <p>{event.description}</p>
-                <p>Date: {formatDate(event.startDate)}</p>
+                <p>Date: {formatDate(event.startDate)} {event.endDate? " - " + formatDate(event.endDate): null}</p>
                 <p>Time: {event.time}</p>
                 <p>Location: {event.location}</p>
               </div>
