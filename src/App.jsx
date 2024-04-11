@@ -14,6 +14,7 @@ import Forum from './forum'
 import Fcomments from './fcomments';
 import Replies from './replies';
 import Page from './Page';
+import Profile from './Myprofile';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/fcomments' element={<Fcomments/>} />
         <Route path='/:id/replies' element={<Replies/>} />
         <Route path='/page' element={<Page/>}></Route>
+        <Route path='/profile' element={<Profile/>}></Route>
       </Routes>
     </Router>
   );
