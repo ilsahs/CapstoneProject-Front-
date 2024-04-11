@@ -33,6 +33,10 @@ function Dashboard() {
                         // Unauthorized, redirect to login
                         navigate('/login', { state: { message: 'Please login to proceed.' } });
                     }
+                    if (error.response.status === 404) {
+                        // Unauthorized, redirect to login
+                        navigate('/login', { state: { message: 'Please login to proceed.' } });
+                    }
                 }
             }
         };
