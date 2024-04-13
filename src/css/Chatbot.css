@@ -105,7 +105,16 @@
 .message-content {
     white-space: pre-wrap; /* This will ensure line breaks are displayed */
 }
-
+.image-preview {
+    max-width: 150px; /* Adjust the maximum width to your desired size */
+    max-height: 150px; /* Adjust the maximum height to your desired size */
+    border-radius: 10px;
+}
+.uploaded-image {
+    max-width: 200px; /* Adjust the maximum width to your desired size */
+    max-height: 200px; /* Adjust the maximum height to your desired size */
+    border-radius: 5px;
+}
 /* Styling for messages from the user */
 .user-message {
     background-color: #9C27B0;

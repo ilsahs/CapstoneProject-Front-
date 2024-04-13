@@ -24,9 +24,6 @@ function Chatbot() {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
-    // Ref for the hidden file input
-    const fileInputRef = React.useRef(null);
-
     useEffect(() => {
         const newWs = new WebSocket('ws://localhost:3002');
         setWs(newWs);
@@ -42,6 +39,7 @@ function Chatbot() {
             const receivedData = event.data;
             if (receivedData === '{"type":"endConversation"}'){
                 text = ''
+                setLoading(false);
             }
             else {
                 text += receivedData;
@@ -52,10 +50,12 @@ function Chatbot() {
 
         ws.onerror = (error) => {
             console.error('WebSocket error:', error);
+            setLoading(false);
         };
 
         ws.onclose = () => {
             console.log('WebSocket connection closed');
+            setLoading(false);
         };
     }, [ws]);
 
@@ -79,36 +79,45 @@ function Chatbot() {
             // setIsBotTyping(true);
             const botResponse = { text: "", sender: 'bot' };
             setMessages((currentMessages) => [...currentMessages, botResponse]);
-            console.log('done')
         } catch (error) {
             console.error('Error submitting query:', error);
-        } finally {
-            console.log('now here')
-            setLoading(false);
         }
     };
 
     const handleFileInputChange = async (e) => {
         const file = e.target.files[0];
+        console.log(file)
+        if (!file) return;
+
         const formData = new FormData();
         formData.append('file', file);
+        console.log(formData);
+
+        const reader = new FileReader();
+
 
         try {
             setLoading(true);
             const userImage = { imageUrl: URL.createObjectURL(file), sender: 'user' };
             setMessages((currentMessages) => [...currentMessages, userImage]);
+
+            reader.onloadend = function() {
+                const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+    
+                ws.send(JSON.stringify({
+                    type: 'file',
+                    mimeType: file.type,
+                    content: base64String,
+                    fileName: file.name
+                }));
+                
+                const botResponse = { text: "", sender: 'bot' };
+                setMessages((currentMessages) => [...currentMessages, botResponse]);
+            };
+            reader.readAsDataURL(file);
             
-            const res = await axios.post(baseURL + '/chat', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            const botResponse = { text: res.data, sender: 'bot' };
-            setMessages((currentMessages) => [...currentMessages, botResponse]);
         } catch (error) {
             console.error('Error submitting image:', error);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -147,21 +156,31 @@ function Chatbot() {
     };
     
     const handleAudioInput = async (formData) => {
+        const file = formData.get('file')
         try {
             setLoading(true);
-            const res = await axios.post(baseURL+'/chat', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            if (!file) return;
+
             const audioUrl = URL.createObjectURL(formData.get('file'));
-            const botResponse = { text: res.data, sender: 'bot' };
+            const botResponse = { text: '', sender: 'bot' };
             const userAudioMessage = { audioUrl: audioUrl, audioFile: formData.get('file'), sender: 'user' };
             setMessages((currentMessages) => [...currentMessages, userAudioMessage, botResponse]);
+
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+
+                ws.send(JSON.stringify({
+                    type: 'file',
+                    mimeType: file.type,
+                    content: base64String,
+                    fileName: file.name
+                }));
+            };
+            reader.readAsDataURL(file);
+           
         } catch (error) {
             console.error('Error submitting audio:', error);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -182,6 +201,7 @@ function Chatbot() {
                         </Typography>
                     </Box>
                     <div className="messages-container">
+                        {console.log(messages)}
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}-message`}>
                                 {message.sender === 'user' ? (
@@ -245,8 +265,8 @@ function Chatbot() {
                             style={{ display: 'none' }}
                             onChange={handleFileInputChange}
                         />
-                        <CameraAltIcon className="icon camera-icon" onClick={handleCameraClick} />
-                        <MicIcon className="icon mic-icon" onClick={handleMicClick} />
+                        <CameraAltIcon className="icon camera-icon" onClick={handleCameraClick} style={{ pointerEvents: loading ? 'none' : 'auto' }} />
+                        <MicIcon className="icon mic-icon" onClick={handleMicClick} style={{ pointerEvents: loading ? 'none' : 'auto' }} />
                         <Button
                             type="submit"
                             color="primary"
