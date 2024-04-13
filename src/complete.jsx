@@ -66,7 +66,7 @@ function Complete() {
   };
   return (
     <div className="complete-container">
-      <div className="form-container">
+      <div className="forms-container">
         <h2 className="complete-h2">Complete your profile!</h2>
         <form onSubmit={handleSubmit}>
           <div className="file-input-container mb-3">
@@ -120,10 +120,10 @@ function Complete() {
 
         <br></br>
         <form onSubmit={handleSkip}>
-          <input type="checkbox" checked={skip} onChange={handleCheckboxChange} />
-          <p>
-            Don't show this again
-          </p>
+        <div className="checkbox-container">
+          <input type="checkbox" checked={skip} onChange={handleCheckboxChange} id="skipCheckbox" />
+          <label htmlFor="skipCheckbox">Don't show this again</label>
+        </div>
           <button type="submit" className="update-button btn btn-success w-100 rounded-0">
             Skip for now
           </button>

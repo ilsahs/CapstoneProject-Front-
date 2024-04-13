@@ -6,20 +6,32 @@
   justify-content: center;
   align-items: center;
   background-color: #f2f2f2; /* Light grey */
-  height: 100vh;
+  height: 110vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
 }
-
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 11px; /* Add some spacing between the checkbox and button */
+}
+.checkbox-container label {
+  margin-bottom: 10px;
+  margin-left: -190px; /* Add some spacing between the checkbox and label */
+}
+.checkbox-container input[type="checkbox"] {
+  margin-left: -100px; /* Add some spacing between the checkbox and label */
+}
 /* Form container */
-.form-container {
+.forms-container {
+  margin: 20px auto; 
   border: 1px solid #ccc;
   border-radius: 10px;
   background: linear-gradient(135deg, #f8f8f8, #c0c0c0);
   background-color: white;
   padding: 20px;
-  width: 90%; /* Adjust as needed */
-  max-width: 400px; /* Adjust as needed */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow */
+  width: 100%; /* Adjust as needed */
+  max-width: 500px; /* Adjust as needed */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Box shadow */
 }
 
 /* Heading */
@@ -105,4 +117,27 @@
   padding: 10px;
   background-color: black; /* Green color */
   color: white; /* Change text color to white */
+}
+
+/* Media Query for Mobile */
+@media screen and (max-width: 768px) {
+  /* Adjustments for mobile devices */
+  .forms-container {
+    width: 90%; /* Adjust width for smaller screens */
+  }
+  .file-input {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+  .date-input {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+  .select-preference-dropdown {
+    width: 60%; /* Adjust width for smaller screens */
+  }
+  .add-preference-button {
+    width: 40%; /* Adjust width for smaller screens */
+  }
+  .update-button {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
 }
