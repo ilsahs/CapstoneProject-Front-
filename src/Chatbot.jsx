@@ -20,10 +20,6 @@ function Chatbot() {
     const audioRecorder = useRef(null);
     const [value, setValue] = useState('');
     const [ws, setWs] = useState(null);
-    const [isMinimized, setIsMinimized] = useState(false);
-    const toggleMinimize = () => {
-        setIsMinimized(!isMinimized);
-    };
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -176,13 +172,8 @@ function Chatbot() {
 
     return (
         <div className="App">
-             {open && (
-                <button onClick={toggleMinimize} className="minimize-button">
-                    {isMinimized ? '▲' : '▼'}
-                </button>
-            )}
             <Modal
-                open={open && !isMinimized}
+                open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"

@@ -22,25 +22,6 @@
     margin-right: 0px; /* Adjust this margin as needed */
 }
 
-.chatgpt-modal {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 350px; /* Adjust the width as needed */
-    height: calc(100% - 48px); /* Full height minus the offset from the top */
-    transform: none; /* Override Material-UI's transform for centering */
-}
-
-.minimize-button {
-    position: fixed;
-    bottom: 0;
-    right: 350px; /* Position to the left of the chat window */
-    z-index: 1300; /* Same z-index as Material-UI's Modal */
-    background-color: #fff; /* Match your chat window's header color */
-    border: none;
-    cursor: pointer;
-}
-
 .floating-chat-btn {
     width: 60px;
     height: 60px;
