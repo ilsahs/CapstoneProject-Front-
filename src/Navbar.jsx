@@ -7,6 +7,7 @@ import LogoImage from './assets/log23.jpg';
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track user's authentication status
   const location = useLocation(); // Use useLocation hook to get the current location
 
   const handleClick = () => setClick(!click);
@@ -20,13 +21,7 @@ function Navbar() {
     }
   };
 
-  const logoutButton = (location.pathname === '/dashboard' || location.pathname === '/forum') ? (
-    <li className='nav-item'>
-        <Link to='/logout' className='nav-links' onClick={closeMobileMenu}>
-            Logout
-        </Link>
-    </li>
-) : null;
+
 
   useEffect(() => {
     showButton();
@@ -37,6 +32,26 @@ function Navbar() {
     // Cleanup the event listener on component unmount
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    
+    setIsLoggedIn(isAuthenticated);
+  }, [location.pathname]);
+
+  const logoutButton = isLoggedIn ? (
+    <li className='nav-item'>
+      <Link to='/logout' className='nav-links' onClick={closeMobileMenu}>
+        Logout
+      </Link>
+    </li>
+  ) : null;
+
+  const isAuthenticated = () => {
+    // Check if the token exists in the cookies
+    const token = document.cookie.split(';').find(cookie => cookie.trim().startsWith('token='));
+    return !!token;
+  };
+  
 
   return (
     <>
@@ -70,13 +85,16 @@ function Navbar() {
               </Link>
             </li>
             {logoutButton} {/* Include the logoutButton here */}
-            <li>
-              <Link to='./Register' className='nav-links-mobile' onClick={closeMobileMenu}>
-                Sign Up
-              </Link>
-            </li>
+            {!isLoggedIn && ( // Render Sign Up link only if the user is not logged in
+              <li>
+                <Link to='./Register' className='nav-links-mobile' onClick={closeMobileMenu}>
+                  Sign Up
+                </Link>
+              </li>
+            )}
           </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          {/* Render Sign Up button if the user is not logged in */}
+          {!isLoggedIn && button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
         </div>
       </nav>
     </>
