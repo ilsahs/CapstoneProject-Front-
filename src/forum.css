@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+/* Reset and global styles */
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	font-family: "Arial", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
 }
+
+/* Banner styles */
 .banner-container {
     position: relative;
     width: 100%; /* Make the banner full width */
@@ -15,9 +19,10 @@
 .banner-image {
     width: 100%; /* Make the image inside the banner full width */
     display: block;
-    height:500px;
+    height: 500px;
     filter: brightness(75%);
 }
+
 .banners-text {
     position: absolute;
     top: 40%; /* Center the text vertically */
@@ -40,7 +45,7 @@
 
 /* Form and Link Styles */
 input {
-    color:#0e0b0b;
+    color: #0e0b0b;
     padding: 12px 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -101,7 +106,6 @@ a:hover {
 /* Button Styles */
 .registerBtn,
 .loginBtn,
-
 .modalBtn {
     display: block;
     width: 200px;
@@ -117,6 +121,7 @@ a:hover {
     margin-bottom: 15px;
     text-align: center;
 }
+
 .homeBtn {
     display: block;
     width: 40%;
@@ -151,8 +156,9 @@ a:hover {
     padding: 20px; /* Padding for inner content */
     display: flex;
     flex-direction: column;  /* Ensure elements stack vertically */
-   
+    margin-top: 20px;
 }
+
 .homeForm > * {
     margin-bottom: 15px; /* Add space between form elements */
 }
@@ -160,17 +166,22 @@ a:hover {
 .homeForm > :last-child {
     margin-bottom: 0; /* Remove bottom margin from the last element */
 }
+
 .home__container label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    font-size: 20px;
 }
+
 .forumTitle {
     margin-bottom: 20px; /* Add bottom margin */
     font-size: 40px;
     color: #531f68;
     text-align: center; /* Center-align the text */
+    font-size: 30px;
 }
+
 
 /* Home Container Styles */
 .home__container {
@@ -178,6 +189,7 @@ a:hover {
     max-width: 100%; /* Ensure the container spans the entire width */
     text-align: center; /* Center align the container's content */
 }
+
 /* Title Button Styling */
 .homeTitle {
     margin: 0 0 20px 0; /* Add bottom margin to separate from other elements */
@@ -185,19 +197,23 @@ a:hover {
     color: #333;
     text-align: center;
 }
+
+/* Footer Wrapper */
 .footer-wrapper {
     padding-top: 240px; /* Same value as the negative margin-top on .thread-wrapper */
-  }
+}
 
 /* Thread Container Styles */
 .thread__container {
-    margin-top:-280px;
+    margin-top: 20px; /* Adjust margin to create space between threads */
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
     padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 200px); /* Limit maximum height to prevent the container from taking up the entire screen */
 }
 
 /* Thread Item Styles */
@@ -215,61 +231,61 @@ a:hover {
     align-items: center;
     justify-content: space-between;
 }
-.homeTitle {
-    font-size: 50px; /* Larger font size for title */
-    font-weight: bold;
-    color: #674188;
-    margin-top:-200px; /* Optional: Adjust margin as needed */
-}
-.home__container label {
-    font-size: 25px; /* Smaller font size for title/description */
-    color: #0e0b0b;
-}
+
 .likes__container {
-	display: flex;
-	align-items: center;
-	margin-right: 25px;
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
 }
+
 .likesBtn {
-	height: 30px;
-	color: #421657;
-	cursor: pointer;
+    height: 30px;
+    color: #421657;
+    cursor: pointer;
 }
+
 .react__container {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
+
 .modal {
-	background-color: #ddd;
-	position: fixed;
+    background-color: #ddd;
+    position: fixed;
 }
+
 .modalInput {
-	width: 100%;
-	padding: 15px;
-	margin-bottom: 15px;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
 }
+
 .modal__content {
-	background-color: #fff;
-	width: 70%;
-	padding: 30px;
-	border-radius: 5px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+    background-color: #fff;
+    width: 70%;
+    padding: 30px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
 .modal__content > label {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
+
 /* For screens smaller than 768px (e.g., tablets) */
 @media only screen and (max-width: 768px) {
-    .forumTitle{
-        font-size: 40px;
+    .forumTitle {
+        font-size: 30px;
     }
-    .banner-image{
+
+    .banner-image {
         width: 100%;
         height: 100%;
         object-fit: cover; /* Ensure the image covers the entire container */
     }
+
     .banners-text {
         width: 90%; /* Adjust width for better fit on smaller screens */
         max-width: 300px; /* Limit maximum width to prevent text from spanning too wide */
@@ -283,13 +299,16 @@ a:hover {
     .banners-text p {
         font-size: 16px; /* Adjust font size for smaller screens */
     }
+
     .homeTitle {
         font-size: 40px; /* Decrease font size for smaller screens */
         margin-top: -150px; /* Adjust margin as needed */
     }
+
     .home__container label {
-        font-size: 24px; /* Decrease font size for smaller screens */
+        font-size: 20px; /* Decrease font size for smaller screens */
     }
+
     .thread__item {
         font-size: 20px; /* Decrease font size for smaller screens */
     }
@@ -298,22 +317,27 @@ a:hover {
 /* For screens smaller than 576px (e.g., mobile devices) */
 @media only screen and (max-width: 576px) {
     .homeForm {
-        width:350px;
+        width: 350px;
         margin-top: -220px; /* Adjust top margin for even smaller screens */
     }
-    .forumTitle{
+
+    .forumTitle {
         font-size: 30px;
     }
+
     .homeTitle {
         font-size: 30px; /* Further decrease font size for smaller screens */
         margin-top: -100px; /* Adjust margin as needed */
     }
+
     .home__container label {
         font-size: 20px; /* Further decrease font size for smaller screens */
     }
+
     .thread__item {
         font-size: 16px; /* Further decrease font size for smaller screens */
     }
+
     .register,
     .login,
     .home,
@@ -322,22 +346,28 @@ a:hover {
         margin-top: -100px;
         padding: 20px; /* Decrease padding for smaller screens */
     }
+
     .registerForm,
     .loginForm {
         width: 90%; /* Adjust form width for smaller screens */
     }
+
     .registerBtn,
     .loginBtn,
     .homeBtn,
     .modalBtn {
         width: 160px; /* Decrease button width for smaller screens */
     }
+
     .home__container {
         width: 90%; /* Adjust container width for smaller screens */
     }
+
     .banner-image {
         max-width: 100%; /* Ensure the image fits within the screen width */
-        height: auto; /* Maintain aspect ratio */
-        /* Add any additional styles specific to extra-small screens */
+        height: auto;
+   
     }
+
+    
 }
