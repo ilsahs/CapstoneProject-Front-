@@ -18,10 +18,48 @@ function Chatbot() {
     const messagesEndRef = useRef(null);
     const recognition = useRef(null);
     const audioRecorder = useRef(null);
+    const [value, setValue] = useState('');
+    const [ws, setWs] = useState(null);
+    const [isMinimized, setIsMinimized] = useState(false);
+    const toggleMinimize = () => {
+        setIsMinimized(!isMinimized);
+    };
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
+
+    // Ref for the hidden file input
+    const fileInputRef = React.useRef(null);
+
+    useEffect(() => {
+        const newWs = new WebSocket('ws://localhost:3002');
+        setWs(newWs);
+
+        return () => {
+            newWs.close();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!ws) return;
+
+        ws.onmessage = (event) => {
+            const receivedData = event.data;
+            console.log(messages)
+            // setMessages(messages => messages.slice(0, -1).concat({ ...messages[messages.length - 1], text: text+receivedData }));
+
+            setValue((prevValue) => prevValue + receivedData); // Concatenate without newline
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed');
+        };
+    }, [ws]);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -29,21 +67,31 @@ function Chatbot() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!prompt.trim()) return;
+        // if (!prompt.trim()) return;
 
         setLoading(true);
         const userMessage = { text: prompt, sender: 'user' };
-        setMessages([...messages, userMessage]);
-        setPrompt('');
+
+        const botResponse = { text: "", sender: 'bot' };
+        setMessages((currentMessages) => [...currentMessages, userMessage]);
+        setMessages((currentMessages) => [...currentMessages, botResponse]);
+        console.log("here")
+
+        console.log(messages)
+
+
+        // setPrompt('');
 
         try {
+            // const res = await axios.post(baseURL +'/chat', { prompt });            
+            ws.send(JSON.stringify({ type: 'text', content: prompt }));            
+            setPrompt(''); // Clear input after sending
             setIsBotTyping(true);
-            const res = await axios.post(baseURL +'/chat', { prompt });
-            const botResponse = { text: res.data, sender: 'bot' };
-            setMessages((currentMessages) => [...currentMessages, botResponse]);
         } catch (error) {
             console.error('Error submitting query:', error);
         } finally {
+            setMessages(messages => messages.slice(0, -1).concat({ ...messages[messages.length - 1], text: value }));
+            console.log(messages)
             setLoading(false);
             setIsBotTyping(false);
         }
@@ -128,8 +176,13 @@ function Chatbot() {
 
     return (
         <div className="App">
+             {open && (
+                <button onClick={toggleMinimize} className="minimize-button">
+                    {isMinimized ? '▲' : '▼'}
+                </button>
+            )}
             <Modal
-                open={open}
+                open={open && !isMinimized}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
@@ -143,6 +196,7 @@ function Chatbot() {
                         </Typography>
                     </Box>
                     <div className="messages-container">
+                        {console.log(messages)}
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}-message`}>
                                 {message.sender === 'user' ? (
@@ -154,8 +208,22 @@ function Chatbot() {
                                         <Avatar src={bot} className="message-avatar" style={{ width: '40px', height: '60px' }} />
                                     </div>
                                 )}
-                                <div className="message-content">
-                                    {message.text && <span>{message.text}</span>}
+                                {message.sender === "user" ? (
+                                    <div className="message-content">
+                                        {console.log(message.sender)}
+                                        {message.text && <span>{message.text}</span>}
+                                        {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
+                                        {message.audioUrl && (
+                                            <audio controls>
+                                                <source src={message.audioUrl} type="audio/wav" />
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        )}
+                                    </div>
+                                    ): <div className="message-content">
+                                        {console.log(message.sender)}
+                                        {console.log(value)}
+                                    {value && <span>{value}</span>}
                                     {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
                                     {message.audioUrl && (
                                         <audio controls>
@@ -163,7 +231,8 @@ function Chatbot() {
                                             Your browser does not support the audio element.
                                         </audio>
                                     )}
-                                </div>
+                                    </div>
+                                }
                             </div>
                         ))}
                         <div ref={messagesEndRef} />

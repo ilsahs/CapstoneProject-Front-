@@ -115,7 +115,7 @@ function Trending() {
           {Array.isArray(events) && events.map(event => (
             <div className="event" key={event._id}>
               <div className="category">
-              <img src={event.image} height alt={event.name} />
+              <img src={event.image} alt={event.name} />
                 <h3>{event.title}</h3>
                 <p>{event.description}</p>
                 <p>Date: {formatDate(event.startDate)} {event.endDate? " - " + formatDate(event.endDate): null}</p>
