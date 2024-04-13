@@ -14,12 +14,11 @@ function Chatbot() {
     const [prompt, setPrompt] = useState('');
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [isBotTyping, setIsBotTyping] = useState(false);
+    // const [isBotTyping, setIsBotTyping] = useState(false);
     const messagesEndRef = useRef(null);
-    const recognition = useRef(null);
-    const audioRecorder = useRef(null);
     const [value, setValue] = useState('');
     const [ws, setWs] = useState(null);
+    let text = ''
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -33,7 +32,6 @@ function Chatbot() {
         setWs(newWs);
 
         return () => {
-            newWs.close();
         };
     }, []);
 
@@ -42,10 +40,14 @@ function Chatbot() {
 
         ws.onmessage = (event) => {
             const receivedData = event.data;
-            console.log(messages)
-            // setMessages(messages => messages.slice(0, -1).concat({ ...messages[messages.length - 1], text: text+receivedData }));
-
-            setValue((prevValue) => prevValue + receivedData); // Concatenate without newline
+            if (receivedData === '{"type":"endConversation"}'){
+                text = ''
+            }
+            else {
+                text += receivedData;
+                setValue((prevValue) => prevValue + receivedData); // Concatenate without newline
+                setMessages(messages => messages.slice(0, -1).concat({ ...messages[messages.length - 1], text: text }));
+            }
         };
 
         ws.onerror = (error) => {
@@ -67,29 +69,22 @@ function Chatbot() {
 
         setLoading(true);
         const userMessage = { text: prompt, sender: 'user' };
-
-        const botResponse = { text: "", sender: 'bot' };
         setMessages((currentMessages) => [...currentMessages, userMessage]);
-        setMessages((currentMessages) => [...currentMessages, botResponse]);
-        console.log("here")
-
-        console.log(messages)
-
-
         // setPrompt('');
 
         try {
             // const res = await axios.post(baseURL +'/chat', { prompt });            
             ws.send(JSON.stringify({ type: 'text', content: prompt }));            
             setPrompt(''); // Clear input after sending
-            setIsBotTyping(true);
+            // setIsBotTyping(true);
+            const botResponse = { text: "", sender: 'bot' };
+            setMessages((currentMessages) => [...currentMessages, botResponse]);
+            console.log('done')
         } catch (error) {
             console.error('Error submitting query:', error);
         } finally {
-            setMessages(messages => messages.slice(0, -1).concat({ ...messages[messages.length - 1], text: value }));
-            console.log(messages)
+            console.log('now here')
             setLoading(false);
-            setIsBotTyping(false);
         }
     };
 
@@ -187,7 +182,6 @@ function Chatbot() {
                         </Typography>
                     </Box>
                     <div className="messages-container">
-                        {console.log(messages)}
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}-message`}>
                                 {message.sender === 'user' ? (
@@ -201,7 +195,6 @@ function Chatbot() {
                                 )}
                                 {message.sender === "user" ? (
                                     <div className="message-content">
-                                        {console.log(message.sender)}
                                         {message.text && <span>{message.text}</span>}
                                         {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
                                         {message.audioUrl && (
@@ -212,16 +205,22 @@ function Chatbot() {
                                         )}
                                     </div>
                                     ): <div className="message-content">
-                                        {console.log(message.sender)}
-                                        {console.log(value)}
-                                    {value && <span>{value}</span>}
-                                    {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
-                                    {message.audioUrl && (
-                                        <audio controls>
-                                            <source src={message.audioUrl} type="audio/wav" />
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                    )}
+                                        {message.text === ''? (
+                                            <span>Typing...</span> )
+                                        : (
+                                        <>
+                                            {console.log(messages)}
+                                            <span>{message.text}</span>
+                                            {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
+                                            {message.audioUrl && (
+                                                <audio controls>
+                                                    <source src={message.audioUrl} type="audio/wav" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                                
+                                            )}
+                                        </>
+                                        )}
                                     </div>
                                 }
                             </div>
@@ -230,7 +229,6 @@ function Chatbot() {
                     </div>
                     <Box className="input-area" component="form" onSubmit={handleSubmit}>
                         {/* Typing indicator */}
-                        {isBotTyping && <span className="typing-indicator">Eventbot is typing...</span>}
                         <TextField
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
