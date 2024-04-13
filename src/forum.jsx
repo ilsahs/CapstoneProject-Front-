@@ -1,4 +1,3 @@
-
 import Likes from "./likes";
 import BannerImage from './assets/forum2.jpg';
 import Fcomments from "./fcomments";
@@ -102,7 +101,6 @@ const Forum = () => {
                     </div>
                     <button className='homeBtn'>CREATE THREAD</button>
                 </form>
-                </main>
                 <div className='thread__container'>
                 {threadList.map((thread) => (
                     <div className='thread__item' key={thread.id}>
@@ -115,6 +113,7 @@ const Forum = () => {
                     
                 ))}
             </div>
+            </main>
             <Chatbot/> {/* Include the Chatbot component */}
             <div className="footer-wrapper">
                 <Footer />
