@@ -102,6 +102,10 @@
     position: relative;
 }
 
+.message-content {
+    white-space: pre-wrap; /* This will ensure line breaks are displayed */
+}
+
 /* Styling for messages from the user */
 .user-message {
     background-color: #9C27B0;
