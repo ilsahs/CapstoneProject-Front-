@@ -15,6 +15,7 @@ const Forum = () => {
             method: "POST",
             body: JSON.stringify({
                 thread,
+                description,
                 email:e,
             }),
             headers: {
@@ -29,12 +30,14 @@ const Forum = () => {
         .catch((err) => console.error(err));
     };
     const [thread, setThread] = useState("");
+    const [description, setDescription] = useState("");
     const [threadList, setThreadList] = useState([]);
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ thread });
         createThread();
         setThread("");
+        setDescription("");
     };
     const navigate = useNavigate()
     
@@ -90,7 +93,7 @@ const Forum = () => {
                 <form className='homeForm' onSubmit={handleSubmit}>
                     <div className='home__container'>
                     <h2 className='forumTitle'>Create a Thread</h2>
-                        <label htmlFor='thread'>Title / Description</label>
+                        <label htmlFor='thread'>Title</label>
                         <input
                             type='text'
                             name='thread'
@@ -98,13 +101,24 @@ const Forum = () => {
                             value={thread}
                             onChange={(e) => setThread(e.target.value)}
                         />
+                        <label htmlFor='description'>Description</label>
+                        <input
+                            type='text'
+                            name='description'
+                            required
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
                     </div>
+                    
                     <button className='homeBtn'>CREATE THREAD</button>
                 </form>
                 <div className='thread__container'>
                 {threadList.map((thread) => (
                     <div className='thread__item' key={thread.id}>
                         <p>{thread.title}</p>
+                        <p>{thread.description}</p>
+                        <p>{thread.date}</p>
                         <div className='react__container'>
                             <Likes numberOfLikes={thread.likes.length} threadId={thread.id} />
                             <Fcomments numberOfComments={thread.replies.length} threadId={thread.id} title={thread.title} />
