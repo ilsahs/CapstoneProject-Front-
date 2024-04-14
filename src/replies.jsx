@@ -8,13 +8,12 @@ const Replies = () => {
     const [title, setTitle] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
-    const [e, setE] = useState()
+    const [e, setE] = useState("")
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(baseURL+`/api/create/reply`);
-                setE(res.data.name);
-                console.log("this is replyyy",res.data)
+                setE(res.data.userEmail)
             } catch (error) {
                 if (error.response) {
                     console.error("Server responded with non-success status", error.response.status);
@@ -31,6 +30,7 @@ const Replies = () => {
                 method: "POST",
                 body: JSON.stringify({
                     id,
+                    
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const Replies = () => {
             method: "POST",
             body: JSON.stringify({
                 id,
-                userId: e,
+                email: e,
                 reply,
             }),
             headers: {
@@ -94,7 +94,7 @@ const Replies = () => {
                     <div className='thread__item'>
                         <p>{reply.text}</p>
                         <div className='react__container'>
-                            <p style={{ opacity: "0.5" }}>by {e}</p>
+                            <p style={{ opacity: "0.5" }}>by {reply.name}</p>
                         </div>
                     </div>
                 ))}

@@ -32,7 +32,7 @@ const Likes = ({ numberOfLikes, threadId }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(baseURL+`/api/thread/likes`);
+                const res = await axios.get(baseURL+`/api/thread/like`);
                 setE(res.data.userEmail);
             } catch (error) {
                 if (error.response) {
