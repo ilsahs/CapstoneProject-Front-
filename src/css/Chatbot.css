@@ -292,7 +292,7 @@
 }
 /* Styling for messages from the user */
 .user-message {
-    background-color: #8b379a; /* Deeper shade of purple */
+    background-color: #9C27B0; /* Deeper shade of purple */
     color: #FFFFFF;
     align-self: flex-end;
     flex-direction: row-reverse;
@@ -310,9 +310,8 @@
 /* Styling for messages from the bot */
 
 .bot-message {
-    /* background: linear-gradient(135deg, #442280, #571663); */
-    background-color: #EAD1DC; /* Light purple background */
-    color: #4B2840; 
+    background: linear-gradient(135deg, #442280, #571663);
+    background-color: #442280; /* Light purple background */
     align-self: flex-start;
     position: relative;
     font-size: medium;

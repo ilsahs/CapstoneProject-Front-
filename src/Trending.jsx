@@ -27,7 +27,6 @@ function Trending() {
        
         const response = await axios.get(baseURL+`/events/this-week/` + `${startDateString} - ${endDateString}`);
         setEvents(response.data);
-        console.log(response.data)
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -115,7 +114,7 @@ function Trending() {
         <h2>Events This Week</h2>
           {Array.isArray(events) && events.map(event => (
             <div className="event" key={event._id}>
-              <img src={event.image} height alt={event.name} />
+              <img src={event.image} alt={event.name} />
               <div className="event-details">
                 <h3>{event.title}</h3>
                 <p>{event.description}</p>
