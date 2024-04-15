@@ -33,7 +33,7 @@ function Trending() {
       }
     };
       fetchEvents();
-    });
+    }, []);
 
 
     const formatDate = (dateString) => {
