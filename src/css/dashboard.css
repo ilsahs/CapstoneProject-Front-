@@ -1,11 +1,78 @@
 /* dashboard.css */
 
+/* Add a class for the dimming overlay */
+.dim-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 999; /* Set a higher z-index to ensure it's behind the modal */
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Set a higher z-index than the dim-overlay */
+    background-color: transparent; /* Remove any background color */
+}
+
+/* Modal content styles */
+.modal-content {
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow to the modal */
+    max-width: 60vw;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* Close button styles */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Image inside modal styles */
+.modal-content img {
+    max-width: 50%; /* Adjust the maximum width as needed */
+    height: auto;
+    margin-bottom: 20px; /* Add some space below the image */
+}
+
+/* Event details inside modal styles */
+.event-details {
+    margin-top: 20px;
+}
+
+/* Comments section styles */
+.comments-section {
+    margin-top: 20px;
+}
+
 /* General styles */
 .dashboard-container {
-    position: relative; /* Add this line */
+    position: relative;
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap to the next row */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
 }
 
 .logout-button {
@@ -30,7 +97,11 @@
 .events-list {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap to the next row */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
 }
+
 
 .banner {
     position: relative;
@@ -42,7 +113,7 @@
 .banner img {
     width: 100%; /* Make the image inside the banner full width */
     display: block;
-    height:600px;
+    height:400px;
 }
 
 .banner-text {
@@ -57,7 +128,7 @@
 
 .banner-text h2 {
     margin-bottom: 10px;
-    font-size: 100px; /* Adjust font size */
+    font-size: 80px; /* Adjust font size */
 }
 
 .banner-text p {
@@ -67,36 +138,34 @@
 
 
 .event-item {
-    background: linear-gradient(135deg, #f8f8f8, #e0e0e0);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    display: flex;
-    flex-direction: row;
-    border-radius: 10px; /* Add border radius */
+    border-radius: 10px;
     margin-bottom: 20px;
     padding: 15px;
+    max-width: calc(33.33% - 20px); /* Adjust width to fit three items per row */
+    width: 100%;
 }
 
 .event-item img {
-    max-width: 400px;
-    height: auto;
-    margin-right: 20px;
+    max-width: 100%; /* Adjust the maximum width to fit the container */
+    height: auto; /* Allow the height to adjust automatically */
+    margin-bottom: 20px; /* Adjust margin to separate image and details */
     border-radius: 10px; /* Add border radius to the image */
 }
 
-.event-details {
-    flex-grow: 1;
+/*.event-details {
     display: flex;
-    flex-direction: column;
-}
+    flex-direction: column; /* Change to column direction 
+}*/
 
-.event-details p {
+/*.event-details p {
     margin: 0;
     flex-grow: 1;
 }
 
 .comments-section {
     margin-top: 15px;
-}
+}*/
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -121,7 +190,7 @@
 
 
     .event-item {
-        flex-direction: column; /* Change flex direction for smaller screens */
+        max-width: calc(90% - 20px); /* Adjust width to fit one item per row */
     }
 
     .event-item img {
@@ -130,3 +199,8 @@
     }
 }
 
+@media (max-width: 992px) {
+    .event-item {
+        max-width: calc(50% - 20px); /* Adjust width to fit two items per row */
+    }
+}

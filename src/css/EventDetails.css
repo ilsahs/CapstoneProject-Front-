@@ -1,0 +1,10 @@
+.event-details-container {
+    max-width: 600px; /* Set maximum width for the container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add some padding for better spacing */
+}
+
+.event-image {
+    max-width: 100%; /* Set maximum width for the image */
+    height: auto; /* Maintain aspect ratio */
+}
