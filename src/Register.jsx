@@ -10,12 +10,19 @@ function Signup() {
     const [Password, setPassword] = useState()
     const navigate = useNavigate()
 
+    const [check, setCheck] = useState(false)
+    const [error, setError] = useState()
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post(baseURL+'/Register', {Name, Email, Password}).catch(err => console.log(err))
         .then(res => {
-            navigate('/login')}
-        )
+          if (res.data === "Success") {
+            navigate('/login'); // Navigate if the response is "Success"
+          } else {
+            setCheck(true)
+            setError(res.data); // Set the error message from the response
+          }
+    })
     }
 
     return (
@@ -58,6 +65,7 @@ function Signup() {
                 </div><br/>
                 <button type="submit" className="button w-100 rounded">Register</button>
               </form>
+              {check && <p>{error}</p>}
             </div>
             <div className="reg-right">
               <h2>Welcome Back!</h2>
