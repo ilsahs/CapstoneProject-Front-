@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Modal, Typography, Box, TextField, Button, Avatar } from '@mui/material';
+import {TextField, Button, Avatar } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import MicIcon from '@mui/icons-material/Mic';
 import './css/Chatbot.css';
@@ -12,7 +14,7 @@ import SendIcon from '@mui/icons-material/Send';
 function Chatbot() {
     const [open, setOpen] = useState(false);
     const [prompt, setPrompt] = useState('');
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([{ text: "👋 Welcome to Support Bot. I am WonderAI, your AI assitant. Let me know how I can help you. ", sender: 'bot' }]);
     const [loading, setLoading] = useState(false);
     // const [isBotTyping, setIsBotTyping] = useState(false);
     const messagesEndRef = useRef(null);
@@ -121,12 +123,12 @@ function Chatbot() {
         }
     };
 
-    const handleCameraClick = () => {
-        const inputElement = document.getElementById('fileInput');
-        if (inputElement) {
-            inputElement.click();
-        }
-    };
+    // const handleCameraClick = () => {
+    //     const inputElement = document.getElementById('fileInput');
+    //     if (inputElement) {
+    //         inputElement.click();
+    //     }
+    // };
 
     const handleMicClick = () => {
         navigator.mediaDevices.getUserMedia({ audio: true })
@@ -185,28 +187,23 @@ function Chatbot() {
     };
 
     return (
-        <div className="App">
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-                className="chatgpt-modal"
-            >
-                <Box className="container">
-                    <Box className="chat-header">
-                        <Avatar src={botAvatar} className="bot-avatar" />
-                        <Typography variant="h6" component="div" className="header-title">
-                            Event Bot Support
-                        </Typography>
-                    </Box>
+        <div className="chatbot-app">
+        {open && (
+          <div className="chatbot-modal">
+            <div className="chatbot-container">
+              <div className="chatbot-header">
+                <div className='title-bot'>
+                <img src={botAvatar} alt="Bot Avatar" className="bot-avatar" />
+                <h6 className="header-title">WonderAI Support Bot</h6>
+                </div>
+                <button className="close-btn" onClick={handleClose}>×</button>
+              </div>
                     <div className="messages-container">
-                        {console.log(messages)}
                         {messages.map((message, index) => (
                             <div key={index} className={`message ${message.sender}-message`}>
                                 {message.sender === 'user' ? (
                                     <div className="user-avatar avatar-container">
-                                        <Avatar src={userAvatar} className="message-avatar" />
+                                        
                                     </div>
                                 ) : (
                                     <div className="bot1-avatar avatar-container">
@@ -233,7 +230,7 @@ function Chatbot() {
                                             <span>{message.text}</span>
                                             {message.imageUrl && <img src={message.imageUrl} alt="User uploaded" className="uploaded-image" />}
                                             {message.audioUrl && (
-                                                <audio controls>
+                                                <audio className="audio" controls>
                                                     <source src={message.audioUrl} type="audio/wav" />
                                                     Your browser does not support the audio element.
                                                 </audio>
@@ -247,45 +244,71 @@ function Chatbot() {
                         ))}
                         <div ref={messagesEndRef} />
                     </div>
-                    <Box className="input-area" component="form" onSubmit={handleSubmit}>
-                        {/* Typing indicator */}
-                        <TextField
-                            value={prompt}
-                            onChange={(e) => setPrompt(e.target.value)}
-                            id="outlined-basic"
-                            label="Query"
-                            variant="outlined"
-                            className="input-field"
-                            disabled={loading}
-                            fullWidth
-                        />
+
+            <form onSubmit={handleSubmit} className="chatbot-input-area">
+            <TextField
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                id="outlined-basic"
+                variant="outlined"
+                className="input-field"
+                disabled={loading}
+                fullWidth
+                InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                    <IconButton
+                        className="icon camera-icon"
+                        edge="end"
+                        aria-label="upload picture"
+                        component="label"
+                        disabled={loading}
+                    >
                         <input
-                            type="file"
-                            id="fileInput"
-                            style={{ display: 'none' }}
-                            onChange={handleFileInputChange}
+                        type="file"
+                        id="fileInput"
+                        style={{ display: 'none' }}
+                        onChange={handleFileInputChange}
                         />
-                        <CameraAltIcon className="icon camera-icon" onClick={handleCameraClick} style={{ pointerEvents: loading ? 'none' : 'auto' }} />
-                        <MicIcon className="icon mic-icon" onClick={handleMicClick} style={{ pointerEvents: loading ? 'none' : 'auto' }} />
-                        <Button
-                            type="submit"
-                            color="primary"
-                            disabled={loading}
-                            className="submit-button"
-                            endIcon={<SendIcon />}
-                        >
-                            Send
-                        </Button>
-                    </Box>
-                </Box>
-            </Modal>
-            <button
-                onClick={handleOpen}
-                className="floating-chat-btn"
-                style={{ backgroundImage: `url(${botAvatar})` }}
+                        <CameraAltIcon />
+                    </IconButton>
+                    <IconButton
+                        className="icon camera-icon"
+                        edge="end"
+                        aria-label="record audio"
+                        onClick={handleMicClick}
+                        disabled={loading}
+                    >
+                        <MicIcon />
+                    </IconButton>
+                    </InputAdornment>
+                ),
+                }}
             />
+            <Button
+                type="submit"
+                color="primary"
+                disabled={loading}
+                className="submit-button"
+                endIcon={<SendIcon />}
+            >
+            Send
+            </Button>
+            </form>
+          </div>
         </div>
-    );
+      )}
+    {!open && (
+      <button
+        onClick={() => setOpen(true)}
+        className="floating-chat-btn"
+        style={{ backgroundImage: `url(${botAvatar})` }}
+      >
+        Chat
+      </button>
+    )}
+    </div>
+  );
 }
 
 export default Chatbot;

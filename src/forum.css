@@ -212,7 +212,7 @@ a:hover {
     width: 100%;
     padding: 20px;
     overflow-y: auto; /* Enable vertical scrolling */
-    max-height: calc(100vh - 200px); /* Limit maximum height to prevent the container from taking up the entire screen */
+    max-height: calc(100vh - 300px); /* Adjust the height as needed */
 }
 
 /* Thread Item Styles */
@@ -367,6 +367,7 @@ a:hover {
         height: auto;
    
     }
+    
 
     
 }

@@ -27,12 +27,13 @@ function Trending() {
        
         const response = await axios.get(baseURL+`/events/this-week/` + `${startDateString} - ${endDateString}`);
         setEvents(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error('Error fetching events:', error);
       }
     };
       fetchEvents();
-    }, []);
+    });
 
 
     const formatDate = (dateString) => {
