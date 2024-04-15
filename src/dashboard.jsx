@@ -7,6 +7,7 @@ import eventBanner from './assets/event33.jpg'; // Import the banner image
 import Chatbot from './Chatbot'; // Import the Chatbot component
 import Footer from './Footer';
 
+
 function Dashboard() {
     const [suc, setSuc] = useState();
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Dashboard() {
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [email, setEmail] = useState();
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedEvent, setSelectedEvent] = useState(null); // State to store the selected event
     const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
     axios.defaults.withCredentials = true;
 
@@ -79,6 +81,11 @@ function Dashboard() {
         setFilteredEvents(filtered);
     };
 
+    const handleEventClick = (event) => {
+        // Navigate to the event details page with the event data
+        navigate(`/event/${event._id}`, { state: { event } }); // Pass the event object in the state
+    };
+    
     return (
         <div>
             <div className="banner">
@@ -102,29 +109,31 @@ function Dashboard() {
                 </div>
                 <ul className="events-list">
                     {filteredEvents.map(event => (
-                        <li key={event.id} className="event-item">
+                        <li key={event.id} className="event-item" onClick={() => handleEventClick(event)}>
                             <img src={event.image} alt="Event" />
                             <div className="event-details">
-                                <p><b>Title: {event.title}</b></p>
-                                <p>Date: {formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>
-                                <p>Time: {event.time}</p>
-                                <p>Location: {event.location}</p>
-                                <p>Category: {event.category}</p>
-                                <p>Summary: {event.description}</p>
-                                <div className="comments-section">
-                                    <p>Comments:</p>
+                                <p><b>{event.title}</b></p>
+                                {/*<p>Date: {formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>*/}
+                                {/*<p>Time: {event.time}</p>*/}
+                                {/*<p>Location: {event.location}</p>*/}
+                                {/*<p>Category: {event.category}</p>*/}
+                                <p> {event.description}</p>
+                               {/* <div className="comments-section">*/}
+                                    {/*<p>Comments:</p>*/}
                                     {/* Assuming Comments is a component */}
-                                    <Comments eventId={event._id} email={email} />
-                                </div>
+                                    {/*<Comments eventId={event._id} email={email} />*/}
+                                {/*</div>*/}
                             </div>
                         </li>
                     ))}
                 </ul>
             </div>
-            <Chatbot /> {/* Include the Chatbot component */}
-            <Footer /> {/* Include the Footer component */}
-        </div>
-    );
+            {/* Pop-up window for showing event details */}
+
+        <Chatbot /> {/* Include the Chatbot component */}
+        <Footer /> {/* Include the Footer component */}
+    </div>
+);
 }
 
 export default Dashboard;

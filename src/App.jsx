@@ -15,6 +15,7 @@ import Fcomments from './fcomments';
 import Replies from './replies';
 import Page from './Page';
 import Profile from './Myprofile';
+import EventDetails from './EventDetails';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/:id/replies' element={<Replies/>} />
         <Route path='/page' element={<Page/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
+        <Route path="/event/:eventId" element={<EventDetails />} />
       </Routes>
     </Router>
   );
