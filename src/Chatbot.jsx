@@ -10,6 +10,7 @@ import botAvatar from './assets/botAvatar.png';
 import bot from './assets/new1.png';
 import userAvatar from './assets/userAvatar.png';
 import SendIcon from '@mui/icons-material/Send';
+import { red } from '@mui/material/colors';
 
 function Chatbot() {
     const [open, setOpen] = useState(false);
@@ -20,6 +21,9 @@ function Chatbot() {
     const messagesEndRef = useRef(null);
     const [value, setValue] = useState('');
     const [ws, setWs] = useState(null);
+    const [isRecording, setIsRecording] = useState(false); // New state to track recording status
+    const [recordTime, setRecordTime] = useState(0);  // State to track the duration of recording
+
     let text = ''
 
     useEffect(() => {
@@ -133,43 +137,45 @@ function Chatbot() {
     const handleMicClick = () => {
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
+                setIsRecording(true); // Start recording indication
                 const mediaRecorder = new MediaRecorder(stream);
                 const chunks = [];
-                console.log("Microphone access granted");
                 mediaRecorder.addEventListener('dataavailable', event => {
                     chunks.push(event.data);
                 });
-    
+
                 mediaRecorder.addEventListener('stop', () => {
+                    setIsRecording(false); // Stop recording indication
                     const blob = new Blob(chunks, { type: 'audio/wav' });
                     const formData = new FormData();
                     formData.append('file', blob, 'audio.wav');
                     handleAudioInput(formData);
                 });
-    
+
                 mediaRecorder.start();
                 setTimeout(() => {
                     mediaRecorder.stop();
-                }, 5000);
+                }, 5000);  // Automatically stop recording after 5 seconds
             })
             .catch(error => {
                 console.error('Error accessing microphone:', error);
+                setIsRecording(false); // Ensure recording state is reset on error
             });
     };
-    
+
     const handleAudioInput = async (formData) => {
         const file = formData.get('file')
         try {
             setLoading(true);
             if (!file) return;
 
-            const audioUrl = URL.createObjectURL(formData.get('file'));
+            const audioUrl = URL.createObjectURL(file);
             const botResponse = { text: '', sender: 'bot' };
-            const userAudioMessage = { audioUrl: audioUrl, audioFile: formData.get('file'), sender: 'user' };
+            const userAudioMessage = { audioUrl: audioUrl, audioFile: file, sender: 'user' };
             setMessages((currentMessages) => [...currentMessages, userAudioMessage, botResponse]);
 
             const reader = new FileReader();
-            reader.onloadend = function() {
+            reader.onloadend = function () {
                 const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
 
                 ws.send(JSON.stringify({
@@ -180,11 +186,13 @@ function Chatbot() {
                 }));
             };
             reader.readAsDataURL(file);
-           
         } catch (error) {
             console.error('Error submitting audio:', error);
+        } finally {
+            setLoading(false);
         }
     };
+
 
     return (
         <div className="chatbot-app">
@@ -245,55 +253,56 @@ function Chatbot() {
                         <div ref={messagesEndRef} />
                     </div>
 
-            <form onSubmit={handleSubmit} className="chatbot-input-area">
-            <TextField
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                id="outlined-basic"
-                variant="outlined"
-                className="input-field"
-                disabled={loading}
-                fullWidth
-                InputProps={{
-                endAdornment: (
-                    <InputAdornment position="end">
-                    <IconButton
-                        className="icon camera-icon"
-                        edge="end"
-                        aria-label="upload picture"
-                        component="label"
-                        disabled={loading}
-                    >
-                        <input
-                        type="file"
-                        id="fileInput"
-                        style={{ display: 'none' }}
-                        onChange={handleFileInputChange}
-                        />
-                        <CameraAltIcon />
-                    </IconButton>
-                    <IconButton
-                        className="icon camera-icon"
-                        edge="end"
-                        aria-label="record audio"
-                        onClick={handleMicClick}
-                        disabled={loading}
-                    >
-                        <MicIcon />
-                    </IconButton>
-                    </InputAdornment>
-                ),
-                }}
-            />
-            <Button
-                type="submit"
-                color="primary"
-                disabled={loading}
-                className="submit-button"
-                endIcon={<SendIcon />}
-            >
-            Send
-            </Button>
+                    <form onSubmit={handleSubmit} className="chatbot-input-area">
+                <TextField
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    id="outlined-basic"
+                    variant="outlined"
+                    className="input-field"
+                    disabled={loading}
+                    fullWidth
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    className="icon camera-icon"
+                                    edge="end"
+                                    aria-label="upload picture"
+                                    component="label"
+                                    disabled={loading}
+                                >
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        style={{ display: 'none' }}
+                                        onChange={handleFileInputChange}
+                                    />
+                                    <CameraAltIcon />
+                                </IconButton>
+                                <IconButton
+                                    className="icon camera-icon"
+                                    edge="end"
+                                    aria-label="record audio"
+                                    onClick={handleMicClick}
+                                    disabled={loading}
+                                    style={{ color: isRecording ? red[700] : 'inherit' }}  // Changes color when recording
+                                >
+                                    {isRecording ? <MicIcon /> : <MicIcon />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+                <Button
+                    type="submit"
+                    color="primary"
+                    disabled={loading}
+                    className="submit-button"
+                    endIcon={<SendIcon />}
+                >
+                    Send
+                </Button>
             </form>
           </div>
         </div>
