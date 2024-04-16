@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const PreferencesSelector = ({ selectedPreferences, setSelectedPreferences }) => {
     const [currentPreference, setCurrentPreference] = useState('');
   
-    const preferences = ['Family Event', 'Female Education', 'Other'];
+    const preferences = [ "Arts & Culture", "Community", "Entertainment", "Education", "Sports", "Leisure", "Tourism", "Professional", "Business", "Health", "Fitness", "Food", "Environmental", "Outdoor", "Special Events", "Other"
+  ];
   
     const handlePreferenceChange = (e) => {
       setCurrentPreference(e.target.value);

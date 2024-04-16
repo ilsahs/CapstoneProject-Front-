@@ -44,9 +44,6 @@ function Profile() {
         fetchData();
     }, [navigate]);
 
-
-
-
     const handleSubmit = (e) => {
         e.preventDefault()
         const formData = new FormData();
