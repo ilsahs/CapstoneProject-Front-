@@ -55,7 +55,7 @@ const Forum = () => {
                 setE(res.data.userEmail);
                 fetch(baseURL+"/api/all/threads")
                 .then((res) => res.json())
-                .then((data) => setThreadList(data.threads))
+                .then((data) => setThreadList(data.threads.map(thread => ({...thread, date: new Date(thread.date).toLocaleDateString('en-GB')}))))
                 .catch((err) => console.error(err));
             } catch (error) {
                 if (error.response) {
@@ -115,17 +115,21 @@ const Forum = () => {
                 </form>
                 <div className='thread__container'>
                 {threadList.map((thread) => (
-                    <div className='thread__item' key={thread.id}>
-                        <p>{thread.title}</p>
-                        <p>{thread.description}</p>
-                        <p>{thread.date}</p>
-                        <div className='react__container'>
-                            <Likes numberOfLikes={thread.likes.length} threadId={thread.id} />
-                            <Fcomments numberOfComments={thread.replies.length} threadId={thread.id} title={thread.title} />
-                        </div>
-                    </div>
-                    
-                ))}
+    <div className='thread__item' key={thread.id}>
+    <p className="title">{thread.title}</p>
+    <p>{thread.description}</p>
+    <div className='reaction-date-container'>
+        <div className='react__container'>
+            <Likes numberOfLikes={thread.likes.length} threadId={thread.id} />
+            <Fcomments numberOfComments={thread.replies.length} threadId={thread.id} title={thread.title} />
+        </div>
+        <p className="date">{thread.date}</p>
+    </div>
+</div>
+
+))}
+
+
             </div>
             </main>
             <Chatbot/> {/* Include the Chatbot component */}
@@ -137,5 +141,3 @@ const Forum = () => {
 };
 
 export default Forum;
-
-

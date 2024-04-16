@@ -209,7 +209,8 @@ a:hover {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: 80%;
+    max-width: 600px;
     padding: 20px;
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: calc(100vh - 300px); /* Adjust the height as needed */
@@ -227,18 +228,27 @@ a:hover {
     background: linear-gradient(135deg, #f8f8f8, #e0e0e0);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column; /* Change to column layout */
+    justify-content: space-between; /* Align items vertically */
+}
+
+.thread__item p.title {
+    font-weight: bold; /* Make the title bold */
+    font-size: 20px;
+}
+
+.thread__item p {
+    margin-bottom: 10px; /* Add space between paragraphs */
 }
 
 .likes__container {
     display: flex;
     align-items: center;
-    margin-right: 25px;
+    margin-right: 10px;
 }
 
 .likesBtn {
-    height: 30px;
+    height: 25px;
     color: #421657;
     cursor: pointer;
 }
@@ -246,6 +256,18 @@ a:hover {
 .react__container {
     display: flex;
     align-items: center;
+}
+
+.reaction-date-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Date Styles */
+.thread__item .date {
+    font-size: 16px;
+    color: #555;
+    margin-left: auto; /* Move the date element to the right */
 }
 
 .modal {
@@ -367,7 +389,8 @@ a:hover {
         height: auto;
    
     }
-    
+
+
 
     
 }
