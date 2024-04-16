@@ -24,8 +24,6 @@ function Dashboard() {
             try {
                 const res = await axios.get(baseURL+'/dashboard');
                 setSuc("Successded OK");
-                console.log("Response:", res.data);
-                console.log("Events:", res.data.events); 
                 setEvents(res.data.events);
                 setFilteredEvents(res.data.events); // Set filtered events initially
                 setEmail(res.data.email);

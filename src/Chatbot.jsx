@@ -15,7 +15,7 @@ import { red } from '@mui/material/colors';
 function Chatbot() {
     const [open, setOpen] = useState(false);
     const [prompt, setPrompt] = useState('');
-    const [messages, setMessages] = useState([{ text: "👋 Welcome to Support Bot. I am WonderAI, your AI assitant. Let me know how I can help you. ", sender: 'bot' }]);
+    const [messages, setMessages] = useState([{ text: "👋 Welcome to Support Bot. I am WanderAI, your AI assitant. Let me know how I can help you. ", sender: 'bot' }]);
     const [loading, setLoading] = useState(false);
     // const [isBotTyping, setIsBotTyping] = useState(false);
     const messagesEndRef = useRef(null);
@@ -202,7 +202,7 @@ function Chatbot() {
               <div className="chatbot-header">
                 <div className='title-bot'>
                 <img src={botAvatar} alt="Bot Avatar" className="bot-avatar" />
-                <h6 className="header-title">WonderAI Support Bot</h6>
+                <h6 className="header-title">WanderAI Support Bot</h6>
                 </div>
                 <button className="close-btn" onClick={handleClose}>×</button>
               </div>
