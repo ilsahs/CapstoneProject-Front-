@@ -1,10 +1,108 @@
 .event-details-container {
-    max-width: 600px; /* Set maximum width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 20px; /* Add some padding for better spacing */
+    max-width: 800px; /* Limit maximum width for better readability */
+    margin: 40px auto; /* Add margin for spacing from top and bottom */
+    padding: 20px; /* Reduce padding for a more compact feel */
+    background: linear-gradient(135deg, #ebe0f0, #fafaf9); /* Gradient background */
+    border-radius: 8px; /* Rounded corners for a softer look */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: relative; /* Position container relative for pseudo-elements */
+    text-align: center; /* Center align text within the container */
+}
+
+.event-details-container::before {
+    content: ""; /* Create a pseudo-element for the line */
+    position: absolute; /* Position it relative to the container */
+    bottom: 0; /* Position it at the bottom */
+    left: 0;
+    width: 100%; /* Full width */
+    height: 2px; /* Height of the line */
+    background-color: #ccc; /* Line color */
+}
+
+.event-details-container h2 {
+    font-size: 23px; /* Larger font size for the event title */
+    margin-bottom: 15px; /* Reduce margin below the title */
+    color: #000000; /* White text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for emphasis */
+}
+
+.event-details-container .location-text {
+     /* Styles for the location paragraph */
+     color: #000000; /* Custom color for location text */
+     font-weight: thin; /* Custom font weight for location text */
+     margin-bottom: 12px;
+ }
+
+.event-details-container .description {
+    /* Styles for the description paragraph */
+    font-style: thin; /* Italic font style for description */
+    color: #666; /* Custom color for description text */
+}
+
+.event-details-container .description-line {
+    border: none;
+    border-top: 1px solid #ccc; /* Define the style of the line */
+    margin: 12px 0; /* Adjust margin as needed */
+}
+
+.category-text {
+    font-size: 15px;
+    /* Your custom styles for the category */
+    font-weight: 300; /* Thin font weight */
+    color: #333; /* Custom color */
+    /* Add any other styles as needed */
+}
+
+.event-details-container p {
+     /* Increase font size for paragraphs */
+    margin-bottom: 12px; /* Reduce margin between paragraphs */
+    color: #000000; /* Light text color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Text shadow for emphasis */
 }
 
 .event-image {
-    max-width: 100%; /* Set maximum width for the image */
+    display: block; /* Ensure the image behaves like a block element */
+    max-width: 100%; /* Set maximum width to prevent overflow */
+    max-height: 300px; /* Limit the maximum height of the image */
+    width: auto; /* Allow the width to adjust automatically */
     height: auto; /* Maintain aspect ratio */
+    margin-bottom: 15px; /* Add margin below the image */
+    margin-left: auto; /* Auto margin for left */
+    margin-right: auto; /* Auto margin for right */
+    border-radius: 8px; /* Rounded corners for the image */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
+}
+
+.event-details-container p:first-child {
+    font-weight: bold; /* Make the first paragraph bold for emphasis */
+}
+
+/* Optional: Add some spacing between the title and image */
+.event-details-container h2 + .event-image {
+    margin-top: 15px;
+}
+
+/* Optional: Add a border at the bottom for a separator */
+.event-details-container {
+    border-bottom: 2px solid #eee; /* Light border color */
+    padding-bottom: 20px; /* Add padding at the bottom to offset the border */
+}
+
+@media (max-width: 480px) {
+    .event-details-container {
+        padding: 15px; /* Reduce padding for smaller screens */
+        margin-left: 10px; /* Add margin on the left side */
+        margin-right: 10px; /* Add margin on the right side */
+    }
+
+    .event-details-container h2 {
+        font-size: 23px; /* Decrease font size for smaller screens */
+    }
+
+    .event-details-container .location-text,
+    .event-details-container .description,
+    .event-details-container .category-text,
+    .event-details-container p {
+        font-size: 17px; /* Decrease font size for smaller screens */
+    }
 }
