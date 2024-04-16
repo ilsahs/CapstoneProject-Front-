@@ -7,6 +7,9 @@ import './css/Trending.css';
 import CREATEVideo from './assets/CREATE.mp4';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa'; 
+import { FaClock } from 'react-icons/fa';
+// npm install react-icons
 
 function Trending() {
   const [events, setEvents] = useState([]);
@@ -85,6 +88,7 @@ function Trending() {
       </div>
 
       <div className="categories-container">
+        <h2 className="explore-heading">Explore Diverse Categories of Events</h2>
         <div className="category">
           <img src={EntImage} alt="Entertainment" />
           <h2>Entertainment</h2>
@@ -110,18 +114,19 @@ function Trending() {
         </div>
       </div>
 
+
+      <h2 className="custom-h2">Discover the exciting events happening this week!</h2>
       <div className="events-container">
-        <h2>Events This Week</h2>
           {Array.isArray(events) && events.map(event => (
             <div className="event" key={event._id}>
               <img src={event.image} alt={event.name} />
-              <div className="event-details">
+              <div className="event-detail">
                 <h3>{event.title}</h3>
-                <p>{event.description}</p>
+                <p className="description">{event.description}</p>
                 <div className="event-info">
-                  <p>Date: {formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>
-                  <p>Time: {event.time}</p>
-                  <p>Location: {event.location}</p>
+                <p className="time-text"><FaClock /> {event.time}</p>
+                <p className="date-text"><FaCalendarAlt />{formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>
+                <p className="location-text"><FaMapMarkerAlt /> {event.location}</p>
                 </div>
               </div>
             </div>

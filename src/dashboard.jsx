@@ -6,6 +6,9 @@ import './css/dashboard.css';
 import eventBanner from './assets/event33.jpg'; // Import the banner image
 import Chatbot from './Chatbot'; // Import the Chatbot component
 import Footer from './Footer';
+import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa'; 
+import { FaClock } from 'react-icons/fa';
+// npm install react-icons
 
 
 function Dashboard() {
@@ -105,19 +108,20 @@ function Dashboard() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 {/* Submit button */}
-                <button className="button w-10 rounded"onClick={handleSearch}>Search</button>
+                <button className="search-button"onClick={handleSearch}>Search</button>
                 </div>
                 <ul className="events-list">
                     {filteredEvents.map(event => (
                         <li key={event.id} className="event-item" onClick={() => handleEventClick(event)}>
                             <img src={event.image} alt="Event" />
                             <div className="event-details">
-                                <p><b>{event.title}</b></p>
-                                {/*<p>Date: {formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>*/}
-                                {/*<p>Time: {event.time}</p>*/}
-                                {/*<p>Location: {event.location}</p>*/}
+                                <p><h3>{event.title}</h3></p>
+                                <hr />
+                                <p className="location-text"><FaMapMarkerAlt /> {event.location}</p>
+                                <p className="time-text"><FaClock /> {event.time}</p>
+                                <p className="date-text"><FaCalendarAlt /> {formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>
                                 {/*<p>Category: {event.category}</p>*/}
-                                <p> {event.description}</p>
+                                {/*<p> {event.description}</p>*/}
                                {/* <div className="comments-section">*/}
                                     {/*<p>Comments:</p>*/}
                                     {/* Assuming Comments is a component */}

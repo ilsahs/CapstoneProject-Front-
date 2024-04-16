@@ -5,14 +5,12 @@
 
 /* Event container */
 .event {
-  background: linear-gradient(135deg, #f8f8f8, #e0e0e0);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    display: flex;
-    flex-direction: row;
-    border-radius: 10px; /* Add border radius */
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border-radius: 10px;
     margin-bottom: 20px;
     padding: 15px;
-    max-width: 900px;
+    max-width: calc(33.33% - 20px); /* Adjust width to fit three items per row */
+    width: 100%;
 }
 
 /* Event image */
@@ -21,13 +19,44 @@
     height: auto;
     margin-right: 20px;
     border-radius: 10px; /* Add border radius to the image */
-  
+    margin-right: auto; /* Auto margin for centering horizontally */
+    margin-left: auto;
 }
 
-.event-details {
+.event-detail {
+  padding: 10px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+.event-detail h3 {
+  font-size: 20px; /* Adjust font size for event title */
+  margin-bottom: 10px; /* Add spacing below title */
+  color: #333; /* Set text color */
+}
+.event-detail p {
+  font-family: 'Times New Roman', Times, serif;
+    font-size: 15px; /* Increase the font size for p */
+    color: #1d1c1c; /* Set the text color */
+    margin-bottom: 8px; /* Add spacing below p */
+}
+.event-detail p svg {
+  color: rgb(48, 44, 44); /* Set the color of the icons to black */
+  vertical-align: middle; /* Align the icons vertically */
+  margin-right: 5px; /* Add spacing between icon and text */
+}
+.event-detail .event-info {
+  border-top: 1px solid #ccc; /* Add a thin border at the top of event info */
+  padding-top: 10px; /* Add some padding at the top of event info */
+}
+.event-detail .event-info p:last-child {
+  margin-bottom: 0; /* Remove margin bottom for the last paragraph */
+}
+.event-detail .description {
+  font-size: 16px; /* Adjust font size for description */
+  font-family: 'Times New Roman', Times, serif;
+  color: #888; /* Set text color */
+  margin-bottom: 12px; /* Add more spacing below description */
 }
 
 .event h3 {
@@ -37,6 +66,21 @@
 
 .event-details p {
   margin: 0;
+}
+.explore-heading{
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+.custom-h2 {
+  padding-top: 40px;
+  font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #fff; /* Text color */
+    background-image: linear-gradient(to right, #030303 0%, #030303 99%, #000000 100%); /* Gradient background */
+    -webkit-background-clip: text; /* Clip text to the background */
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Fill text with gradient */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
 }
 
 .event-details p:last-child {
@@ -144,6 +188,70 @@
   margin-bottom: 10px;
 }
 
+/*event slider */
+.events-slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: hidden; /* Hide overflow to prevent horizontal scroll */
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.events-container {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping of event containers */
+  gap: 20px; /* Adjust the gap between events */
+  transition: transform 0.5s ease; /* Add smooth transition for sliding effect */
+  overflow-x: auto; /* Enable horizontal scrollbar */
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  padding: 15px; /* Add padding to the container */
+}
+.events-slider button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px 10px;
+  color: black; /* Add color to the buttons */
+  z-index: 1; /* Ensure the buttons are above other elements */
+}
+
+.events-slider button:disabled {
+  color: lightgray; /* Change color of disabled button */
+  cursor: not-allowed; /* Change cursor for disabled button */
+}
+
+/* Style for the left button */
+.events-slider .left-button {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; /* Ensure the button is above the events container */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px 10px;
+  color: black; /* Add color to the buttons */
+}
+
+/* Style for the right button */
+.events-slider .right-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; /* Ensure the button is above the events container */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px 10px;
+  color: black; /* Add color to the buttons */
+}
+
+
 @media (min-width: 768px) {
   .video-container {
     width: 40%;
@@ -166,17 +274,68 @@
   .about-us p {
     font-size: 14px;
   }
+  .event-detail p {
+    font-size: 16px; /* Decrease the font size for p on smaller screens */
+  }
+  
+  .event-detail .description {
+    font-size: 14px; /* Decrease the font size for description on smaller screens */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .events-container {
+    padding: 10px; /* Adjust padding for tablet devices */
+  }
+  
+  .event {
+    max-height: 1000px;
+    max-width: calc(50% - 20px); /* Adjust width to fit two items per row */
+  }
+
+  .event img {
+    max-width: 100%; /* Set maximum width to 100% of its container */
+    height: auto; /* Allow the height to adjust accordingly */
+    margin-right: 10px; /* Reduce margin between images */
+    margin-bottom: 10px; /* Add margin to the bottom of images */
+  }
+  .event-detail p {
+    font-size: 16px; /* Decrease the font size for p on smaller screens */
+  }
+  
+  .event-detail .description {
+    font-size: 14px; /* Decrease the font size for description on smaller screens */
+  }
 }
 
 @media (max-width: 767px) {
+  .events-container {
+    flex-direction: column; /* Change flex-direction to column for smaller screens */
+    gap: 0; /* Remove the gap between events */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: auto; /* Enable vertical scrollbar */
+    padding: 0; /* Remove padding */
+  }
+
+  .event {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
+    max-width: 100%; /* Adjust width to fit the container */
+    width: 100%;
+    margin-bottom: 20px; /* Add margin-bottom between events */
+  }
   .event {
     flex-direction: column;
     align-items: center; /* Center event content vertically */
   }
 
   .event img {
-    margin-bottom: 15px;
+    max-width: 250px;
+  height: auto;
+  margin: 0 auto; /* Center the image horizontally */
+  border-radius: 10px; /* Add border radius to the image */
+  margin-left: 26px;
   }
+
   .video-container {
     width: 80%;
     margin: 0 auto 20px;
@@ -192,5 +351,11 @@
     margin-left: 10px; 
     margin-right: 10px; 
   }
+  .event-detail p {
+    font-size: 17px; /* Decrease the font size for p on smaller screens */
+  }
+  
+  .event-detail .description {
+    font-size: 18px; /* Decrease the font size for description on smaller screens */
+  }
 }
-
