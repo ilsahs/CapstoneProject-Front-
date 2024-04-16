@@ -13,12 +13,16 @@ import { FaClock } from 'react-icons/fa';
 
 function Trending() {
   const [events, setEvents] = useState([]);
+  const [preferences, setPreferences] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? 
+  import.meta.env.VITE_API_BASE_URL_PROD : 
+  import.meta.env.VITE_API_BASE_URL_DEV;
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         axios.defaults.withCredentials = true;
-        const baseURL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_BASE_URL_PROD : import.meta.env.VITE_API_BASE_URL_DEV;
 
         const currentDate = new Date();
         const firstDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
@@ -34,7 +38,34 @@ function Trending() {
         console.error('Error fetching events:', error);
       }
     };
-      fetchEvents();
+
+    fetchEvents();
+
+    const fetchPreferences = async () => {
+      try {
+        axios.defaults.withCredentials = true;
+        const res = await axios.get(`${baseURL}/user/preferences`);
+        console.log("Logged in")
+        console.log(res.data.Preferences)
+        const preferencesArray = res.data.Preferences.split(',').map(preference => preference.trim());
+        console.log(preferencesArray)
+        setPreferences(preferencesArray);
+        setLoggedIn(true);
+        // events.map((x) => {
+
+        // })
+
+      } catch (error) {
+        console.error("Error fetching preferences:", error);
+        if (error.response && (error.response.status === 401 || error.response.status === 404)) {
+          setLoggedIn(false);
+          console.log("Unauthorized or Not Found");
+        }
+      }
+    };
+
+      fetchPreferences();
+
     }, []);
 
 
@@ -117,7 +148,31 @@ function Trending() {
 
       <h2 className="custom-h2">Discover the exciting events happening this week!</h2>
       <div className="events-container">
-          {Array.isArray(events) && events.map(event => (
+      {loggedIn?(
+          <>
+            <h2>Recommended For You</h2>
+            {Array.isArray(preferences) && Array.isArray(events) && events
+              .filter(event => preferences.includes(event.category))
+              .map(event => (
+                <div className="event" key={event._id}>
+                  <img src={event.image} alt={event.name} />
+                  <div className="event-details">
+                    <h3>{event.title}</h3>
+                    <p>{event.description}</p>
+                    <div className="event-info">
+                      <p>Date: {formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>
+                      <p>Time: {event.time}</p>
+                      <p>Location: {event.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </>
+        ): 
+        (
+          <>
+          
+            {Array.isArray(events) && events.map(event => (
             <div className="event" key={event._id}>
               <img src={event.image} alt={event.name} />
               <div className="event-detail">
@@ -131,6 +186,9 @@ function Trending() {
               </div>
             </div>
           ))}
+       </>
+        )}
+
       </div>
     </div>
   );
