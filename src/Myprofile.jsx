@@ -3,8 +3,11 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios'
 import PreferencesSelector from './pref'
 import './css/myProfile.css'
+import defaultProfilePicture from './assets/no.png';
+
+
 function Profile() {
-    const [ProfilePicture, setProfilePicture] = useState()
+    const [ProfilePicture, setProfilePicture] = useState(defaultProfilePicture)
     const [ProfilePictureToSend, setProfilePictureToSend] = useState()
     const [DOB, setDOB] = useState()
     const [Password, setPassword] = useState()
@@ -75,12 +78,15 @@ function Profile() {
             };
             reader.readAsDataURL(file);
         } else {
-            setProfilePicture(ProfilePicture);
+            // No file selected, set default profile picture
+            setProfilePicture(defaultProfilePicture);
         }
-        setProfilePictureToSend(file)
+        setProfilePictureToSend(file);
     };
+    
 
     return (
+        <div className='profile-container'>
         <div className="complete-container">
             <div className="form-container">
                 <h2 className="complete-h2">My profile</h2>
@@ -106,7 +112,7 @@ function Profile() {
                         className="file-input form-control rounded-0"
                         onChange={handleFileChange}
                     />
-                    <div className="mb-3">
+                    <div className="mb-3" style={{ marginTop: '20px' }}>
                         <label htmlFor="Email">
                             <strong>Email</strong>
                         </label>
@@ -153,11 +159,13 @@ function Profile() {
                             setSelectedPreferences={setSelectedPreferences}
                         />
                     </div>
-                    <button type="submit" className="update-button btn btn-success w-100 rounded-0">
-                Update
-              </button>
+                    <button type="submit" className="update-button btn btn-success w-100 rounded-0" style={{ marginBottom: '10px' }}>
+    Update
+</button>
+
                 </form><br />
             </div>
+        </div>
         </div>
     );
 }
