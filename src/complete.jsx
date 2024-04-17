@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './css/complete.css'
 import axios from 'axios'
 import placeholderImage from './assets/no.png'
+import Chatbot from './Chatbot';
 
 import PreferencesSelector from './pref'
 function Complete() {
@@ -131,6 +132,7 @@ function Complete() {
         </form>
 
       </div>
+      <Chatbot/>
     </div>
   );
 }

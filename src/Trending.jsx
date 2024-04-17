@@ -116,7 +116,7 @@ function Trending() {
 
       <p> Discover upcoming events in Qatar! Whether you're a local or a visitor, Qatar Events keeps you informed. From cultural festivals to sports and concerts, we've got you covered. </p>
       <p>  Join us and experience Qatar's vibrant cultural scene! Stay tuned for updates on exclusive events and exciting happenings happening across the country. With Qatar Events, your ultimate guide to all things entertainment, you'll never miss out on the action.</p>
-      
+      <p> Immerse yourself in Qatar's rich tapestry of experiences and create unforgettable memories at the heart of the Arabian Gulf.</p>
       </div>
 
       <div className="categories-container">

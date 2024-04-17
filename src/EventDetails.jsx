@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./css/EventDetails.css"; // Import the CSS file for styling
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa'; 
 import { FaClock } from 'react-icons/fa';
-
+import Chatbot from './Chatbot';
 
 function EventDetails() {
     const location = useLocation();
@@ -47,7 +47,7 @@ function EventDetails() {
             <p className="time-text"><FaClock /> {event.time}</p>
             <p className="location-text"><FaMapMarkerAlt />  {event.location}</p>
             {/* Add more details here as needed */}
-            
+            <Chatbot/>
         </div>
     );
 }
