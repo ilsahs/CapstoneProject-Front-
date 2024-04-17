@@ -68,7 +68,7 @@
   margin: 0;
 }
 .explore-heading{
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  Shadow effect */
 }
 .custom-h2 {
   padding-top: 40px;
@@ -80,7 +80,7 @@
     -webkit-background-clip: text; /* Clip text to the background */
     background-clip: text;
     -webkit-text-fill-color: transparent; /* Fill text with gradient */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
 }
 
 .event-details p:last-child {
