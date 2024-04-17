@@ -144,32 +144,34 @@ function Trending() {
           <h3>Arts and Culture</h3>
         </div>
       </div>
+      <div className="divider"></div>
 
 
       <h2 className="custom-h2">Discover the exciting events happening this week!</h2>
       <div className="events-container">
-      {loggedIn?(
-          <>
-            <h2>Recommended For You</h2>
-            {Array.isArray(preferences) && Array.isArray(events) && events
-              .filter(event => preferences.includes(event.category))
-              .map(event => (
-                <div className="event" key={event._id}>
-                  <img src={event.image} alt={event.name} />
-                  <div className="event-details">
-                    <h3>{event.title}</h3>
-                    <p>{event.description}</p>
-                    <div className="event-info">
-                      <p>Date: {formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>
-                      <p>Time: {event.time}</p>
-                      <p>Location: {event.location}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </>
-        ): 
-        (
+      {loggedIn ? (
+  <div>
+    <h2>Recommended For You</h2>
+    <div className="events-container">
+      {Array.isArray(preferences) && Array.isArray(events) && events
+        .filter(event => preferences.includes(event.category))
+        .map(event => (
+          <div className="event" key={event._id}>
+            <img src={event.image} alt={event.name} />
+            <div className="event-detail">
+              <h3>{event.title}</h3>
+              <p className="description">{event.description}</p>
+              <div className="event-info">
+                <p className="time-text"><FaClock /> {event.time}</p>
+                <p className="date-text"><FaCalendarAlt />{formatDate(event.startDate)} {event.endDate ? " - " + formatDate(event.endDate) : null}</p>
+                <p className="location-text"><FaMapMarkerAlt /> {event.location}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+    </div>
+  </div>
+) : (
           <>
           
             {Array.isArray(events) && events.map(event => (
