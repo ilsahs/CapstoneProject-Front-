@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './Button'; // Ensure this Button component is properly exported and compatible with JSX.
 import { Link, useLocation } from 'react-router-dom';
 import './css/Navbar.css';
-import LogoImage from './assets/log23.jpg';
+import LogoImage from './assets/image.png';
 
 function Navbar() {
   const [click, setClick] = useState(false);
