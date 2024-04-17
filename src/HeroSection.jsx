@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Button } from './Button'; // Ensure this Button component is properly exported and compatible with JSX.
 import './css/HeroSection.css';
-import adventureVideo from './assets/banner2.mp4'; // Import the video file
+import adventureVideo from './assets/vid.mp4'; // Import the video file
 
 function HeroSection() {
   return (
