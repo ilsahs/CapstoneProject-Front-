@@ -8,6 +8,10 @@
     font-family: "Arial", sans-serif;
 }
 
+body {
+    background-color: #f5f5f5
+}
+
 /* Banner styles */
 .banner-container {
     position: relative;
@@ -19,7 +23,7 @@
 .banner-image {
     width: 100%; /* Make the image inside the banner full width */
     display: block;
-    height: 500px;
+    height: 350px;
     filter: brightness(75%);
 }
 
@@ -197,48 +201,38 @@ a:hover {
     text-align: center;
 }
 
-/* Footer Wrapper */
-.footer-wrapper {
-    padding-top: 240px; /* Same value as the negative margin-top on .thread-wrapper */
-}
-
 /* Thread Container Styles */
 .thread__container {
-    margin-top: 20px; /* Adjust margin to create space between threads */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 80%;
+    width: 100%;
     max-width: 600px;
-    padding: 20px;
-    overflow-y: auto; /* Enable vertical scrolling */
-    max-height: calc(100vh - 300px); /* Adjust the height as needed */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* This should add space between thread items */
 }
 
 /* Thread Item Styles */
 .thread__item {
-    font-size: 25px;
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    margin-bottom: 20px;
     background-color: #ffffff; /* White background */
     border-radius: 10px; /* Rounded corners */
-    background: linear-gradient(135deg, #f8f8f8, #e0e0e0);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 1rem; /* Inner spacing */
     display: flex;
-    flex-direction: column; /* Change to column layout */
-    justify-content: space-between; /* Align items vertically */
+    margin-top: 1rem; /* Fallback margin if gap is not working */
+    flex-direction: column;
+    gap: 0.5rem; /* Space between elements inside a thread */
 }
 
 .thread__item p.title {
-    font-weight: bold; /* Make the title bold */
-    font-size: 20px;
+    font-weight: bold;
+    color: #4a4a4a; /* Dark grey for better contrast */
+    font-size: 1.25rem; /* Larger font size for titles */
+    margin-bottom: 0.25rem; /* Small margin below the title */
 }
 
 .thread__item p {
-    margin-bottom: 10px; /* Add space between paragraphs */
+    color: #6a6a6a; /* Slightly lighter than the title for contrast */
+    line-height: 1.5; /* Improved line height for readability */
 }
 
 .likes__container {
@@ -248,7 +242,7 @@ a:hover {
 }
 
 .likesBtn {
-    height: 25px;
+    height: 20px;
     color: #421657;
     cursor: pointer;
 }
@@ -256,18 +250,60 @@ a:hover {
 .react__container {
     display: flex;
     align-items: center;
+    gap: 0.5rem; /* Space between likes and comments icons */
 }
 
 .reaction-date-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem; /* Add space above this section */
+    font-size: 0.9rem; /* Smaller font size for meta information */
+    color: #7a7a7a; /* Meta information a bit lighter */
 }
+
 /* Date Styles */
 .thread__item .date {
-    font-size: 16px;
+    font-size: 12px;
     color: #555;
     margin-left: auto; /* Move the date element to the right */
+}
+
+.date {
+    white-space: nowrap; /* Prevent the date from wrapping */
+}
+
+.like-icon {
+    color: #885ead; /* A purple shade that matches the 'Create Thread' button */
+}
+
+.comment-icon {
+    color: #885ead; /* Same purple shade for consistency */
+}
+
+.homeBtn:hover, .likesBtn:hover, .commentBtn:hover {
+    opacity: 0.8; /* Slight opacity change on hover for interactivity */
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+    .thread__container {
+        padding: 1rem; /* Adjust padding on smaller screens */
+    }
+    
+    .thread__item {
+        padding: 0.75rem; /* Slightly smaller padding on smaller screens */
+    }
+    
+    .thread__item p.title {
+        font-size: 1rem; /* Smaller font size for titles on smaller screens */
+    }
+    
+    .reaction-date-container {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the start on smaller screens */
+        gap: 0.25rem; /* Smaller gap between elements */
+    }
 }
 
 .modal {
@@ -294,6 +330,179 @@ a:hover {
 .modal__content > label {
     margin-bottom: 15px;
 }
+
+.forum-main {
+    padding: 2rem; /* Add padding for spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5; /* Light background for the main area */
+}
+
+.forum-section {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.forum-section__title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.forum-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+input[type='text'],
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 150px; /* Larger text area for description */
+    resize: vertical; /* Allow vertical resize only */
+}
+
+.forum-button {
+    background-color: #421657;
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.replyForm {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+}
+
+
+.replyBtn {
+    background-color: #421657;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.replyBtn:hover {
+    background-color: #59327a;
+}
+
+/* Reply Container Styles */
+.replyContainer {
+    margin-top: 1rem;
+}
+
+.replyItem {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.replyText {
+    margin-bottom: 0.5rem;
+}
+
+.replyMeta {
+    color: #7a7a7a;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+.replies {
+    max-width: 600px;
+    margin: 2rem auto; /* Centering the content */
+    padding: 1rem;
+    background-color: #fff; /* Adding a background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.repliesTitle {
+    color: #674188; /* Theme color for the title */
+    text-align: center;
+}
+
+/* Style the reply form to make it stand out */
+.replyForm {
+    background-color: #f9f9f9; /* Light background for the form */
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem; /* Add some space between the form and the replies list */
+}
+
+.replyLabel {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #674188; /* Keeping the theme color */
+    font-weight: 400; /* Make label text a bit bolder */
+}
+
+.replyInput {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem; /* Add margin to the bottom */
+    background: #ffffff; /* White background for the textarea */
+}
+
+.replyBtn {
+    width: 100%; /* Make the button full width */
+    padding: 10px 20px; /* Increase padding for better clickability */
+    font-size: 1rem;
+    font-weight: bold; /* Bold font for the button text */
+}
+
+/* Individual reply item styles */
+.replyItem {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #eee; /* Slight border for definition */
+}
+
+.replyText {
+    font-size: 1rem;
+    color: #333; /* Darker text for better readability */
+    margin-bottom: 0.5rem;
+}
+
+.replyMeta {
+    font-size: 0.85rem;
+    color: #674188; /* Theme color for metadata */
+    text-align: right;
+}
+
 
 /* For screens smaller than 768px (e.g., tablets) */
 @media only screen and (max-width: 768px) {

@@ -75,30 +75,29 @@ const Replies = () => {
         <main className='replies'>
             <h1 className='repliesTitle'>{title}</h1>
     
-            <form className='modal__content' onSubmit={handleSubmitReply}>
-                <label htmlFor='reply'>Reply to the thread</label>
+            <form className='replyForm' onSubmit={handleSubmitReply}>
+                <label htmlFor='reply' className='replyLabel'>Reply to the thread</label>
                 <textarea
+                    id='reply'
                     rows={5}
                     value={reply}
                     onChange={(e) => setReply(e.target.value)}
-                    type='text'
                     name='reply'
-                    className='modalInput'
+                    className='replyInput'
+                    placeholder='Type your reply here...'
                 />
-    
-                <button className='modalBtn'>SEND</button>
+                <button type='submit' className='replyBtn'>SEND</button>
             </form>
     
-            <div className='thread__container'>
-                {replyList.map((reply) => (
-                    <div className='thread__item'>
-                        <p>{reply.text}</p>
-                        <div className='react__container'>
-                            <p style={{ opacity: "0.5" }}>by {reply.name}</p>
-                        </div>
+            <div className='replyContainer'>
+                {replyList.map((replyItem, index) => (
+                    <div className='replyItem' key={index}>
+                        <p className='replyText'>{replyItem.text}</p>
+                        <p className='replyMeta'>by {replyItem.name}</p>
                     </div>
                 ))}
             </div>
         </main>
-    );}
+    );
+}
 export default Replies;

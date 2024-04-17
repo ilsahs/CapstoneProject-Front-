@@ -75,64 +75,61 @@ const Forum = () => {
         fetchData();
     }, []);
 
-
-
-
-
-    return (
-        <>
-            <div className="banner-container">
-            <img src={BannerImage} alt="Banner" className="banner-image" />
-            <div className="banners-text">
-                <h2>Join the Conversation</h2>
-                <p>Share Your Event Experiences and Insights!</p>
-            </div>
-        </div>
-        
-            <main className='home'>
-                <form className='homeForm' onSubmit={handleSubmit}>
-                    <div className='home__container'>
-                    <h2 className='forumTitle'>Create a Thread</h2>
-                        <label htmlFor='thread'>Title</label>
-                        <input
-                            type='text'
-                            name='thread'
-                            required
-                            value={thread}
-                            onChange={(e) => setThread(e.target.value)}
-                        />
-                        <label htmlFor='description'>Description</label>
-                        <input
-                            type='text'
-                            name='description'
-                            required
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
+        return (
+            <>
+                <div className="banner-container">
+                    <img src={BannerImage} alt="Banner" className="banner-image" />
+                    <div className="banners-text">
+                        <h2>Join the Conversation</h2>
+                        <p>Share Your Event Experiences and Insights!</p>
                     </div>
+                </div>
+                
+                <main className='forum-main'>
+                    <section className='forum-section'>
+                        <h2 className='forum-section__title'>Create a Thread</h2>
+                        <form className='forum-form' onSubmit={handleSubmit}>
+                            <div className='input-group'>
+                                <label htmlFor='thread'>Title</label>
+                                <input
+                                    type='text'
+                                    name='thread'
+                                    required
+                                    value={thread}
+                                    onChange={(e) => setThread(e.target.value)}
+                                />
+                            </div>
+                            <div className='input-group'>
+                                <label htmlFor='description'>Description</label>
+                                <textarea
+                                    name='description'
+                                    required
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                ></textarea>
+                            </div>
+                            <button className='forum-button'>CREATE THREAD</button>
+                        </form>
+                    </section>
                     
-                    <button className='homeBtn'>CREATE THREAD</button>
-                </form>
-                <div className='thread__container'>
+                    <div className='thread-container'>
                 {threadList.map((thread) => (
     <div className='thread__item' key={thread.id}>
     <p className="title">{thread.title}</p>
     <p>{thread.description}</p>
     <div className='reaction-date-container'>
         <div className='react__container'>
-            <Likes numberOfLikes={thread.likes.length} threadId={thread.id} />
-            <Fcomments numberOfComments={thread.replies.length} threadId={thread.id} title={thread.title} />
+            <Likes className='.like-icon' numberOfLikes={thread.likes.length} threadId={thread.id} />
+            <Fcomments className='.comment-icon' numberOfComments={thread.replies.length} threadId={thread.id} title={thread.title} />
         </div>
         <p className="date">{thread.date}</p>
     </div>
 </div>
-
 ))}
+</div>
 
-
-            </div>
             </main>
-            <Chatbot/> {/* Include the Chatbot component */}
+            <Chatbot/>
             <div className="footer-wrapper">
                 <Footer />
             </div>
