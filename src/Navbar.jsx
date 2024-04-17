@@ -80,21 +80,21 @@ function Navbar() {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/favorites' className='nav-links' onClick={closeMobileMenu}>
-                Favorites
+              <Link to='/profile' className='nav-links' onClick={closeMobileMenu}>
+                Profile
               </Link>
             </li>
             {logoutButton} {/* Include the logoutButton here */}
             {!isLoggedIn && ( // Render Sign Up link only if the user is not logged in
               <li>
-                <Link to='./Register' className='nav-links-mobile' onClick={closeMobileMenu}>
-                  Sign Up
+                <Link to='./login' className='nav-links-mobile' onClick={closeMobileMenu}>
+                  Login
                 </Link>
               </li>
             )}
           </ul>
           {/* Render Sign Up button if the user is not logged in */}
-          {!isLoggedIn && button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          {!isLoggedIn && button && <Button buttonStyle='btn--outline'>Login</Button>}
         </div>
       </nav>
     </>
