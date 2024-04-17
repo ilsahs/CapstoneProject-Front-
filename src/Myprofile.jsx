@@ -4,7 +4,7 @@ import axios from 'axios'
 import PreferencesSelector from './pref'
 import './css/myProfile.css'
 import defaultProfilePicture from './assets/no.png';
-
+import Chatbot from './Chatbot';
 
 function Profile() {
     const [ProfilePicture, setProfilePicture] = useState(defaultProfilePicture)
@@ -165,7 +165,9 @@ function Profile() {
 
                 </form><br />
             </div>
+            <Chatbot/>
         </div>
+        
         </div>
     );
 }

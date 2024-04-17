@@ -12,6 +12,7 @@
 }
 
 /* Footer Section */
+/* Footer Section */
 .footer-section {
   margin-bottom: 20px;
   flex-grow: 1; /* Allow sections to grow equally */
@@ -31,6 +32,16 @@
 .footer-section ul li {
   margin-bottom: 5px;
 }
+
+.footer-section ul li a {
+  color: #fff; /* Set default link color to white */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.footer-section ul li a:hover {
+  color: #7e57c2; /* Change link color to purple when hovered */
+}
+
 
 /* Social Icons */
 .social-icons {
@@ -84,7 +95,7 @@
   .footer-container {
     flex-direction: column; /* Change direction to column for smaller screens */
     align-items: center; /* Center items vertically */
-  }
+      }
 
   .footer-section {
     width: 100%; /* Set width to 100% for smaller screens */
