@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   background-color: #f2f2f2; /* Light grey */
-  height: 110vh;
+  height: 90vh;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
 }
 .checkbox-container {
@@ -15,30 +15,52 @@
   margin-bottom: 11px; /* Add some spacing between the checkbox and button */
 }
 .checkbox-container label {
-  margin-bottom: 10px;
-  margin-left: -190px; /* Add some spacing between the checkbox and label */
+  margin-bottom: 13px;
+  margin-left: -180px; /* Add some spacing between the checkbox and label */
 }
 .checkbox-container input[type="checkbox"] {
   margin-left: -100px; /* Add some spacing between the checkbox and label */
 }
 /* Form container */
 .forms-container {
-  margin: 20px auto; 
+  position: relative; /* or absolute, fixed */
+  margin: 20px auto;
   border: 1px solid #ccc;
   border-radius: 10px;
   background: linear-gradient(135deg, #f8f8f8, #c0c0c0);
   background-color: white;
-  padding: 20px;
-  width: 100%; /* Adjust as needed */
-  max-width: 500px; /* Adjust as needed */
+  padding: 30px;
+  width: 80%; /* Adjust the width as needed */
+  max-width: 500px; /* Adjust the max-width as needed */
+  height: auto; /* Allow the height to adjust based on content */
+  max-height: 700px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Box shadow */
 }
-
+.image-container {
+  margin-top:-24px;
+  margin-bottom: 10px; /* Adjust the margin as needed */
+  margin-left:auto;
+  margin-right:auto;
+}
 /* Heading */
 .complete-h2{
-  font-size: 2.5rem;
-  margin-bottom: 30px; /* Spacing after each h2 or strong */
+  font-size: 2.0rem;
+  margin-bottom: 10px; /* Spacing after the heading */
   display: block;
+  text-align: center; /* Center align the text */
+  color: #4b1470; /* Text color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for depth */
+  font-family: 'Arial', sans-serif; /* Font family */
+  letter-spacing: 1px; /* Letter spacing for readability */
+  line-height: 1.5; /* Line height for spacing between lines */
+}
+.file-input-label strong {
+  font-weight: bold;
+  color: #4b1470; /* Purple color */
+  font-size: 1.0rem; /* Larger font size */
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 2px; /* Increased letter spacing for emphasis */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
 }
 .file-input-label {
   font-size: 1.5rem;
@@ -53,6 +75,7 @@
 
 /* File input */
 .file-input {
+  margin-bottom: -10px;
   color:black;
   background-color: white;
   font-size: 1.0rem;
@@ -62,10 +85,18 @@
   width: 100%; /* Example width */
   box-sizing: border-box; /* Include padding and border in width */
 }
-
+.file-input::-webkit-file-upload-button {
+  color: white;
+  background-color: #622883; /* Blue color */
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
 
 /* Date input */
 .date-input {
+  margin-bottom: -5px;;
   color:black;
   font-size: 1.0rem;
   border: 1px solid #ccc; /* Example border style */
@@ -111,6 +142,7 @@
 
 /* Update button */
 .update-button {
+  margin-bottom: -30px;
   width: 100%;
   border-radius: 10px;
   font-size: 1.2rem;
@@ -123,7 +155,16 @@
 @media screen and (max-width: 768px) {
   /* Adjustments for mobile devices */
   .forms-container {
-    width: 90%; /* Adjust width for smaller screens */
+    top: 2px; /* Adjust the top position */
+    margin: 10px auto; /* Adjust the margin */
+    padding: 20px; /* Adjust the padding */
+    width: 90%; /* Adjust the width */
+    max-width: none; /* Remove the max-width */
+    height: auto; /* Allow the height to adjust based on content */
+    max-height: none; /* Remove the max-height */
+  }
+  .complete-container {
+    height: 90vh; /* Adjust the height */
   }
   .file-input {
     font-size: 0.9rem; /* Adjust font size for smaller screens */
@@ -139,5 +180,55 @@
   }
   .update-button {
     font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+  .checkbox-container {
+    margin-left: 0; /* Reset margin for mobile devices */
+    margin-bottom: 15px; /* Adjust margin bottom for better spacing */
+    justify-content: flex-start; /* Align items to the start of the container */
+  }
+
+  .checkbox-container label {
+    margin-left: -100px; /* Adjust margin for better spacing */
+  }
+
+  .checkbox-container input[type="checkbox"] {
+   /* margin-left: 0;  Reset margin for mobile devices */
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Adjustments for tablet devices */
+  .forms-container {
+    padding: 50px; /* Increase padding for tablets */
+    width: 70%; /* Adjust the width for tablets */
+    max-width: 90%; /* Adjust the max-width for tablets */
+    margin-top: -90px; /* Adjust margin-top for tablets */
+  }
+  .file-input-label {
+    font-size: 1.3rem; /* Adjust font size for tablets */
+  }
+  .file-input {
+    font-size: 1.1rem; /* Adjust font size for tablets */
+  }
+  .select-preference-dropdown {
+    width: 80%; /* Adjust width for tablets */
+  }
+  .add-preference-button {
+    width: 50%; /* Adjust width for tablets */
+  }
+  .update-button {
+    font-size: 1.1rem; /* Adjust font size for tablets */
+  }
+  .checkbox-container {
+    margin-left:-100px;
+    justify-content: center; /* Center align items */
+  }
+
+  .checkbox-container label {
+    margin-left: -300px; /* Adjust margin for better spacing */
+  }
+
+  .checkbox-container input[type="checkbox"] {
+    margin-left: -290px; /* Reset margin for tablet devices */
   }
 }

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './css/complete.css'
 import axios from 'axios'
+import placeholderImage from './assets/no.png'
 
 import PreferencesSelector from './pref'
 function Complete() {
-  const [ProfilePicture, setProfilePicture] = useState('http://localhost:3001/ProfilePictures/empty.png')
+  const [ProfilePicture, setProfilePicture] = useState(placeholderImage)
   const [skip, setSkip] = useState(false)
   const [DOB, setDOB] = useState()
   const [ProfilePictureToSend, setProfilePictureToSend] = useState()
