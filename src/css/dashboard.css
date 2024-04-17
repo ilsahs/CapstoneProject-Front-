@@ -108,13 +108,17 @@
     width: 100%; /* Make the banner full width */
     overflow: hidden; /* Ensure the text doesn't overflow outside the banner */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 350px; /* Set the height of the banner */
 }
+
 
 .banner img {
     width: 100%; /* Make the image inside the banner full width */
     display: block;
-    height:400px;
+    height: auto; /* Allow the height to adjust automatically */
+    object-fit: cover; /* Ensure the image covers the entire container */
 }
+
 
 .banner-text {
     position: absolute;
@@ -124,18 +128,19 @@
     color: white; /* Text color */
     font-family: 'Arial', sans-serif; /* Change font family */
     text-align: center; /* Align text center */
+    width: 90%; /* Adjust width for better fit on smaller screens */
+    max-width: 400px; /* Limit maximum width to prevent text from spanning too wide */
 }
 
 .banner-text h2 {
     margin-bottom: 10px;
-    font-size: 80px; /* Adjust font size */
+    font-size: 40px; /* Adjust font size */
 }
 
 .banner-text p {
     margin: 0;
-    font-size: 30px; /* Adjust font size */
+    font-size: 20px; /* Adjust font size */
 }
-
 
 .event-item {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -220,11 +225,17 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
+
+    .banner {
+        height: auto; /* Change height to auto to maintain aspect ratio */
+    }
+
     .banner img {
-        width: 100%;
+        width: 100%; /* Make the image inside the banner full width */
         height: auto; /* Change height to auto to maintain aspect ratio */
         object-fit: cover; /* Ensure the image covers the entire container */
     }
+
     .banner-text {
         width: 90%; /* Adjust width for better fit on smaller screens */
         max-width: 300px; /* Limit maximum width to prevent text from spanning too wide */
@@ -238,7 +249,6 @@
     .banner-text p {
         font-size: 16px; /* Adjust font size for smaller screens */
     }
-
     .event-item {
         width: 100%; /* Ensure each item takes full width */
         margin-bottom: 20px; /* Add spacing between items */
