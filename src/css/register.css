@@ -12,7 +12,10 @@
   max-width: 100%;
   min-height: 400px;
 }
-
+.error-message {
+  color: red;
+  margin-top: 5px; /* Adjust margin-top as needed */
+}
 /* Left Side */
 .left-side {
   position: absolute;

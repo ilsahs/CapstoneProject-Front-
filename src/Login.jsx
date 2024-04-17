@@ -24,6 +24,11 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // Perform form validation
+        if (!Email || !Password) {
+          setMessage('Please enter both email and password.');
+          return;
+        }
         axios.post( baseURL + '/login', {Email, Password})
         .then(res => {
             console.log("login: " + res.data);
@@ -34,16 +39,20 @@ function Login() {
             }
             if(res.data.Status === "Success" && res.data.Skip === "false") {
               navigate("/complete")
+          }else {
+            // Login unsuccessful due to incorrect credentials
+            setMessage('Incorrect email or password. Please try again.');
           }
-        }).catch(err => console.log(err))
-    }
+        })
+        .catch((err) => console.log(err));
+    };
 
     return (
       <div className="log-container">
         <div className="log-boxes">
           <div className="log-left">
             <h2 className="title">LOGIN</h2>
-            {message && <div className="alert alert-info" role="alert">{message}</div>}
+            <div className="error-message">{message}</div> {/* Error message display */}
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="Email"><strong>Email</strong></label><br/>
@@ -66,6 +75,7 @@ function Login() {
                   className="input rounded"
                   value={Password}
                   onChange={(e) => setPassword(e.target.value)}
+                  minLength="4"
                 />
                 <p className="anchor">
                 <Link to="/forgot-password" className="text-decoration-none">Forgot Password?</Link>

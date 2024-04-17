@@ -14,6 +14,25 @@ function Signup() {
     const [error, setError] = useState()
     const handleSubmit = (e) => {
         e.preventDefault()
+         // Basic form validation
+    if (!Name || !Email || !Password) {
+      setError('Please fill in all fields.');
+      setCheck(true);
+      return;
+    }
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(Email)) {
+      setError('Please enter a valid email address.');
+      setCheck(true);
+      return;
+    }
+    // Validate password strength (add more criteria if needed)
+    if (Password.length < 4) {
+      setError('Password must be at least 4 characters long.');
+      setCheck(true);
+      return;
+    }
         axios.post(baseURL+'/Register', {Name, Email, Password}).catch(err => console.log(err))
         .then(res => {
           if (res.data === "Success") {
@@ -26,10 +45,11 @@ function Signup() {
     }
 
     return (
-        <div className="reg-container">
-          <div className="reg-boxes">
-            <div className="reg-left">
-              <h2>SIGN UP</h2> <br/>
+      <div className="reg-container">
+      <div className="reg-boxes">
+        <div className="reg-left">
+          <h2>SIGN UP</h2> 
+          {check && <p className="error-message">{error}</p>} <br/>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="Name"><strong>Name</strong></label>
@@ -65,7 +85,6 @@ function Signup() {
                 </div><br/>
                 <button type="submit" className="button w-100 rounded">Register</button>
               </form>
-              {check && <p>{error}</p>}
             </div>
             <div className="reg-right">
               <h2>Welcome Back!</h2>
