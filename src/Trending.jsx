@@ -148,11 +148,12 @@ function Trending() {
       <div className="divider"></div>
 
 
-      <h2 className="custom-h2">Discover the exciting events happening this week!</h2>
+      {loggedIn ?
+      <h2 className="custom-h2">Discover recommended events for you!</h2>: 
+      <h2 className="custom-h2">Discover the exciting events happening this week!</h2>}
       <div className="events-container">
       {loggedIn ? (
   <div>
-    <h2>Recommended For You</h2>
     <div className="events-container">
       {Array.isArray(preferences) && Array.isArray(events) && events
         .filter(event => preferences.includes(event.category))
